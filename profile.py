@@ -15,4 +15,11 @@ class Profile:
         self.place_work = place_work
         self.stars = stars
 
+    def print_info(self):
+        # Функия для вывода информации о профиле в консоль
+        # Пока здесь будет заглушка !!!!! потом сделам нормальную реализацию
+        print(self.name)
 
+    #def test_worthiness(self, filter: Filter) -> bool:
+    # проверка на то, что профиль подходит под условия заданные пользователем(filter)
+    # Пока опять же заглушка
