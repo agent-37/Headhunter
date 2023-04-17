@@ -7,9 +7,9 @@ class Filter:
     name = None
     placer = None
     spec = None
-    salary = None
+    min_salary = None
+    max_salary = None
     place_work = None
-    stars = [0, 0, 0, 0, 0]
 
     def add_spec(self, new_spec: str) -> None:
         # Добавляет элемент в специализацию для фильтра
@@ -28,9 +28,9 @@ class Filter:
         self.name = None
         self.placer = None
         self.spec = None
-        self.salary = None
+        self.min_salary = None
+        self.max_salary = None
         self.place_work = None
-        self.stars = [0, 0, 0, 0, 0]
 
     def check_correct(self) -> bool:
         # Проверка на корректность фильтра, то есть на минимальную информацию для просеивания информации

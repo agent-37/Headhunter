@@ -1,5 +1,6 @@
 import Filter
 
+
 class Profile:
     # Это класс в котором будет храниться информация о профиле вакансии
     # или человека ищущего работу
@@ -23,5 +24,24 @@ class Profile:
         print(self.name)
 
     def test_worthiness(self, filter: Filter) -> bool:
-    # проверка на то, что профиль подходит под условия заданные пользователем(filter)
-    # Пока опять же заглушка
+        # проверка на то, что профиль подходит под условия заданные пользователем(filter)
+        if filter.check_correct() is not True:
+            return False
+        if filter.name is not None and filter.name != self.name \
+           or filter.placer is not None and filter.placer != self.placer \
+           or filter.min_salary is not None and filter.min_salary > self.salary\
+           or filter.max_salary is not None and filter.max_salary < self.salary\
+           or filter.place_work is not None and filter.place_work not in self.place_work:
+            return False
+        flag = False
+        if filter.spec is not None:
+            for one_spec in self.spec:
+                if len(filter.spec) <= len(one_spec):
+                    local_flag = True
+                    for position in len(filter.spec):
+                        if filter.spec[position] is not one_spec[position]:
+                            local_flag = False
+                            break
+                    flag = flag or local_flag
+
+        return flag
