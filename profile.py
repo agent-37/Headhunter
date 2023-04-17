@@ -1,4 +1,4 @@
-
+import Filter
 
 class Profile:
     # Это класс в котором будет храниться информация о профиле вакансии
@@ -22,6 +22,6 @@ class Profile:
         # Пока здесь будет заглушка !!!!! потом сделаем нормальную реализацию
         print(self.name)
 
-    #def test_worthiness(self, filter: Filter) -> bool:
+    def test_worthiness(self, filter: Filter) -> bool:
     # проверка на то, что профиль подходит под условия заданные пользователем(filter)
     # Пока опять же заглушка
