@@ -1,10 +1,11 @@
 import Filter
+import Specialization
 
 
 class Profile:
     # Это класс в котором будет храниться информация о профиле вакансии
     # или человека ищущего работу
-    def __init__(self, name: str, placer: str, spec: list, salary: int, place_work: list, stars=None):
+    def __init__(self, name: str, placer: str, spec: list[Specialization], salary: int, place_work: list, stars=None):
         # Это конструктор для класса Profile. name- ФИО, placer - разместитель объявления(компания или человек)
         # spec - специализация это будет лист в виде профессии и ее сужения
         # salary - зарплата, place_work - место где может работать(листом т.к. можно работать в разных городах)
@@ -33,15 +34,10 @@ class Profile:
            or filter.max_salary is not None and filter.max_salary < self.salary\
            or filter.place_work is not None and filter.place_work not in self.place_work:
             return False
-        flag = False
+
         if filter.spec is not None:
             for one_spec in self.spec:
-                if len(filter.spec) <= len(one_spec):
-                    local_flag = True
-                    for position in len(filter.spec):
-                        if filter.spec[position] is not one_spec[position]:
-                            local_flag = False
-                            break
-                    flag = flag or local_flag
+                if filter.spec.is_nested(one_spec):
+                    return True
 
-        return flag
+        return False

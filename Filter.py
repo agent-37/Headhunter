@@ -1,3 +1,4 @@
+import Specialization
 
 
 class Filter:
@@ -21,7 +22,7 @@ class Filter:
     def reduce_spec(self) -> None:
         # Убирает элемент из специализации для фильтра
         if self.spec is not None:
-            self.spec.pop()
+            self.spec.reduce_spec()
 
     def delete_all_info(self) -> None:
         # Удаляет всю информации из фильтра, просто упрощение, чтобы не удалять все вручную
