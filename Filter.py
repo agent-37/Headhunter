@@ -13,7 +13,6 @@ class Filter:
     place_work = None
     work_exp_min = None
     work_exp_max = None
-    name_education = None
     level_education = None
     unique_skills = None
 
@@ -39,7 +38,6 @@ class Filter:
         self.place_work = None
         self.work_exp_min = None
         self.work_exp_max = None
-        self.name_education = None
         self.level_education = None
         self.unique_skills = None
 

@@ -24,6 +24,7 @@ class Profile:
         self.work_exp_min = work_exp_min
         self.work_exp_max = work_exp_max
         self.name_education = name_education
+        # Какие ступени образования могут быть?
         self.level_education = level_education
         self.unique_skills = unique_skills
         self.stars = stars
@@ -38,10 +39,23 @@ class Profile:
         if filter.check_correct() is not True:
             return False
         if filter.name is not None and filter.name != self.name \
-           or filter.placer is not None and filter.placer != self.placer \
-           or filter.min_salary is not None and filter.min_salary > self.salary\
-           or filter.max_salary is not None and filter.max_salary < self.salary\
-           or filter.place_work is not None and filter.place_work not in self.place_work:
+                or filter.placer is not None and filter.placer != self.placer \
+                or filter.min_salary is not None and filter.min_salary > self.salary\
+                or filter.max_salary is not None and filter.max_salary < self.salary\
+                or filter.place_work is not None and filter.place_work not in self.place_work\
+                or filter.level_education is not None and filter.level_education > self.level_education\
+                or filter.work_exp_max is not None and filter.work_exp_max < self.work_exp_max\
+                or filter.work_exp_min is not None and filter.work_exp_min > self.work_exp_min:
+            return False
+
+        count_unique_skills = 0
+        for skill in self.unique_skills:
+            for need_skill in filter.unique_skills:
+                if need_skill == skill:
+                    count_unique_skills += 1
+                    break
+
+        if count_unique_skills != len(filter.unique_skills):
             return False
 
         if filter.spec is not None:
