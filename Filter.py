@@ -11,6 +11,11 @@ class Filter:
     min_salary = None
     max_salary = None
     place_work = None
+    work_exp_min = None
+    work_exp_max = None
+    name_education = None
+    level_education = None
+    unique_skills = None
 
     def add_spec(self, new_spec: str) -> None:
         # Добавляет элемент в специализацию для фильтра
@@ -32,6 +37,11 @@ class Filter:
         self.min_salary = None
         self.max_salary = None
         self.place_work = None
+        self.work_exp_min = None
+        self.work_exp_max = None
+        self.name_education = None
+        self.level_education = None
+        self.unique_skills = None
 
     def check_correct(self) -> bool:
         # Проверка на корректность фильтра, то есть на минимальную информацию для просеивания информации
