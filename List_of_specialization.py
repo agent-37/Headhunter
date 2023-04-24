@@ -10,3 +10,11 @@ class List_of_specialization:
             self.specializations.append(new_spec)
         # !!иначе ошибка (потом сделать или не сделать)
 
+    def read_from_file:
+        # чтение специализаций из файла
+        f = open(input_file)
+
+
+
+
+
