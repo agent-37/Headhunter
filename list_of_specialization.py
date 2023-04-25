@@ -5,23 +5,19 @@ class List_of_specialization:
 
     def add_specialization(self, new_spec: Specialization):
         # проверка на то, есть ли уже эта специализация в листе
-        # !!здесь стоит сделать проверку на то, что специализыция введена корректно (под вопросом)
+        # !!здесь стоит сделать проверку на то, что специализация введена корректно (под вопросом)
         if new_spec not in self.specializations:
             self.specializations.append(new_spec)
-        # !!иначе ошибка (потом сделать или не сделать)
+        else:
+            with open('exeptions.txt', 'a') as exeption_file:
+                exeption_file.write('Найдена специализация, которая ранее уже была добавлена: '
+                                    + str(new_spec.profession) + '\n')
 
     def read_from_file(self):
-        # чтение специализаций из файла
+        # чтение специализаций из файла с проверкой повторений
         with open('input_file.txt') as f_spec:
             file_str = f_spec.readline()
             self.add_specialization(Specialization(list(file_str.split())))
             while file_str:
                 file_str = f_spec.readline()
                 self.add_specialization(Specialization(list(file_str.split())))
-
-
-
-
-
-
-
