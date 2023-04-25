@@ -1,4 +1,4 @@
-import Specialization
+from specialization import Specialization
 
 class List_of_specialization:
     specializations = []
@@ -10,9 +10,16 @@ class List_of_specialization:
             self.specializations.append(new_spec)
         # !!иначе ошибка (потом сделать или не сделать)
 
-    def read_from_file:
+    def read_from_file(self):
         # чтение специализаций из файла
-        f = open(input_file)
+        with open('input_file.txt') as f_spec:
+            file_str = f_spec.readline()
+            self.add_specialization(Specialization(list(file_str.split())))
+            while file_str:
+                file_str = f_spec.readline()
+                self.add_specialization(Specialization(list(file_str.split())))
+
+
 
 
 

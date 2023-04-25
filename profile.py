@@ -1,5 +1,5 @@
-import Filter
-import Specialization
+from filter import Filter
+from specialization import Specialization
 
 
 class Profile:
