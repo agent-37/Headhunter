@@ -1,4 +1,6 @@
 from profile import Profile
+from specialization import Specialization
+from list_of_specialization import List_of_specialization
 
 
 class Base:
@@ -8,6 +10,47 @@ class Base:
     def add_new_profile(self, new_profile: Profile):
         # !!здесь стоит сделать проверку на то, что профиль хороший
         self.data_base.append(new_profile)
+        # заглушка !!!!!!!!
 
-    def check_correct_specialization_in_profile(self):
-        # проверка наличия введённой специализации в базе данных (того, что такая вообще существует)
+    def read_profile_from_file(self, list_of_spec: List_of_specialization):
+        f_prof = open('input_file_of_profiles.txt')
+        while f_prof.readline() != '':
+            name = f_prof.readline()
+            placer = f_prof.readline()
+            buff = int(f_prof.readline())
+            spec = []
+            for i in range(buff):
+                help_list = list(f_prof.readline().split())
+                work_exp_min = f_prof.readline()
+                work_exp_max = f_prof.readline()
+                spec.append(Specialization(help_list, work_exp_min, work_exp_max))
+            salary = float(f_prof.readline())
+            buff = int(f_prof.readline())
+            place_work = []
+            for i in range(buff):
+                place_work.append(f_prof.readline())
+            name_education = f_prof.readline()
+            level_education = int(f_prof.readline())
+            buff = int(f_prof.readline())
+            unique_skills = []
+            for i in range(buff):
+                unique_skills.append(f_prof.readline())
+            stars = []
+            for i in range(5):
+                stars.append(f_prof.readline())
+            new_prof = Profile(name, placer, spec, salary, place_work, name_education, level_education, unique_skills,
+                               stars)
+            if len(new_prof.spec) == 0:
+                continue
+            flag = 0
+            for spec in new_prof.spec:
+                if spec not in list_of_spec.specializations:
+                    flag = 1
+                    break
+
+            if flag == 0:
+                self.data_base.append(new_prof)
+        f_prof.close()
+
+
+
