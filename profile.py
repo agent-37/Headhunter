@@ -6,8 +6,7 @@ class Profile:
     # Это класс в котором будет храниться информация о профиле вакансии
     # или человека ищущего работу
     def __init__(self, name: str, placer: str, spec: list[Specialization], salary: int, place_work: list,
-                 work_exp_min: int, work_exp_max: int, name_education: str, level_education: int,
-                 unique_skills: list[str], stars=None):
+                 name_education: str, level_education: int, unique_skills: list[str], stars=None):
         # Это конструктор для класса Profile. name- ФИО, placer - соискатель объявления(компания или человек)
         # spec - специализация это будет лист в виде профессии и ее сужения
         # salary - зарплата, place_work - место где может работать(листом т.к. можно работать в разных городах)
