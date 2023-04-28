@@ -21,8 +21,6 @@ class Profile:
         self.spec = spec
         self.salary = salary
         self.place_work = place_work
-        self.work_exp_min = work_exp_min
-        self.work_exp_max = work_exp_max
         self.name_education = name_education
         # Какие ступени образования могут быть?
         self.level_education = level_education
@@ -43,9 +41,7 @@ class Profile:
                 or filter.min_salary is not None and filter.min_salary > self.salary\
                 or filter.max_salary is not None and filter.max_salary < self.salary\
                 or filter.place_work is not None and filter.place_work not in self.place_work\
-                or filter.level_education is not None and filter.level_education > self.level_education\
-                or filter.work_exp_max is not None and filter.work_exp_max < self.work_exp_max\
-                or filter.work_exp_min is not None and filter.work_exp_min > self.work_exp_min:
+                or filter.level_education is not None and filter.level_education > self.level_education:
             return False
 
         count_unique_skills = 0

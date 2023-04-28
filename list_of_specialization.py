@@ -15,6 +15,7 @@ class List_of_specialization:
 
     def read_from_file(self):
         # чтение специализаций из файла с проверкой повторений
+        # !! Надо переименовать файл
         with open('input_file.txt') as f_spec:
             file_str = f_spec.readline()
             self.add_specialization(Specialization(list(file_str.split())))
