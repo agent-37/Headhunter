@@ -5,14 +5,13 @@ class Filter:
     # Это класс в котором будет храниться информация о фильтре для отсеивания нужных и не нужных людей
     # Параметры в фильтре такие же как и в анкете, но часть из них может отсутствовать или быть не полной
     # Так же скажу, что setter и getter для переменных не имеет смысла делать, потому что легче сделать их публичными
+    # !! Надо добавить параметр sort для понятия того как отсартировывать базу данных
     name = None
     placer = None
     spec = None
     min_salary = None
     max_salary = None
     place_work = None
-    work_exp_min = None
-    work_exp_max = None
     level_education = None
     unique_skills = None
 
@@ -36,8 +35,6 @@ class Filter:
         self.min_salary = None
         self.max_salary = None
         self.place_work = None
-        self.work_exp_min = None
-        self.work_exp_max = None
         self.level_education = None
         self.unique_skills = None
 
