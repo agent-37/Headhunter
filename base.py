@@ -45,5 +45,3 @@ class Base:
                                stars)
             self.add_new_profile(new_prof, list_of_spec)
         f_prof.close()
-
-
