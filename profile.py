@@ -1,5 +1,6 @@
 from filter import Filter
 from specialization import Specialization
+from list_of_specialization import List_of_specialization
 
 
 class Profile:
@@ -37,9 +38,9 @@ class Profile:
             return False
         if filter.name is not None and filter.name != self.name \
                 or filter.placer is not None and filter.placer != self.placer \
-                or filter.min_salary is not None and filter.min_salary > self.salary\
-                or filter.max_salary is not None and filter.max_salary < self.salary\
-                or filter.place_work is not None and filter.place_work not in self.place_work\
+                or filter.min_salary is not None and filter.min_salary > self.salary \
+                or filter.max_salary is not None and filter.max_salary < self.salary \
+                or filter.place_work is not None and filter.place_work not in self.place_work \
                 or filter.level_education is not None and filter.level_education > self.level_education:
             return False
 
@@ -59,3 +60,12 @@ class Profile:
                     return True
 
         return False
+
+    def check_all_spec_correct(self, list_of_spec: List_of_specialization) -> bool:
+        if len(self.spec) == 0:
+            return False
+        for spec in self.spec:
+            if spec not in list_of_spec.specializations:
+                return False
+
+        return True
