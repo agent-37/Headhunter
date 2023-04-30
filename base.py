@@ -24,8 +24,8 @@ class Base:
             spec = []
             for i in range(buff):
                 help_list = list(f_prof.readline().split(', '))
-                work_exp_min = f_prof.readline()
-                work_exp_max = f_prof.readline()
+                work_exp_min = float(f_prof.readline())
+                work_exp_max = float(f_prof.readline())
                 spec.append(Specialization(help_list, work_exp_min, work_exp_max))
             salary = float(f_prof.readline())
             buff = int(f_prof.readline())
@@ -38,9 +38,7 @@ class Base:
             unique_skills = []
             for i in range(buff):
                 unique_skills.append(f_prof.readline())
-            stars = []
-            for i in range(5):
-                stars.append(f_prof.readline())
+            stars = list(f_prof.readline().split(', '))
             new_prof = Profile(name, placer, spec, salary, place_work, name_education, level_education, unique_skills,
                                stars)
             self.add_new_profile(new_prof, list_of_spec)
