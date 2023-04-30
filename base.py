@@ -23,7 +23,7 @@ class Base:
             buff = int(f_prof.readline())
             spec = []
             for i in range(buff):
-                help_list = list(f_prof.readline().split())
+                help_list = list(f_prof.readline().split(', '))
                 work_exp_min = f_prof.readline()
                 work_exp_max = f_prof.readline()
                 spec.append(Specialization(help_list, work_exp_min, work_exp_max))
