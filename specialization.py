@@ -18,14 +18,13 @@ class Specialization:
 
     def is_nested(self, new_profession: 'Specialization') -> bool:
         # Функция проверят вложена ли new_profession в данную profession
-        # !! Тут стоит написать new_profession: Specialization, но PyCharm ругается поэтому пока будет без этого
         if len(new_profession.profession) > len(self.profession):
             return False
         if self.work_exp_min is not None and self.work_exp_min > new_profession.work_exp_min or \
                 self.work_exp_max is not None and self.work_exp_max < new_profession.work_exp_max:
             return False
         for position in range(len(new_profession.profession)):
-            if new_profession.profession[position] is not self.profession[position]:
+            if new_profession.profession[position] != self.profession[position]:
                 return False
 
         return True
