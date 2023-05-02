@@ -1,5 +1,6 @@
 from specialization import Specialization
 
+
 class List_of_specialization:
     specializations = []
 
@@ -22,3 +23,10 @@ class List_of_specialization:
                 file_str = f_spec.readline()
                 self.add_specialization(Specialization(list(file_str.split(', '))))
 
+    def reduce_find_recommand(self, new_spec: Specialization) -> list[str]:
+        # Функция по заданной специализации пытается найти какое-нибудь уточнение этой специализации
+        answer = []
+        for spec in self.specializations:
+            if spec.is_nested(new_spec) and len(spec.profession) != len(new_spec.profession):
+                answer.append(spec.profession[len(new_spec.profession)])
+        return answer
