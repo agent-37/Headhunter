@@ -17,10 +17,10 @@ class List_of_specialization:
     def read_from_file(self):
         # чтение специализаций из файла с проверкой повторений
         with open('input_file_of_specialization.txt') as f_spec:
-            file_str = f_spec.readline()
+            file_str = f_spec.readline()[:-1]
             self.add_specialization(Specialization(list(file_str.split(', '))))
             while file_str:
-                file_str = f_spec.readline()
+                file_str = f_spec.readline()[:-1]
                 self.add_specialization(Specialization(list(file_str.split(', '))))
 
     def reduce_find_recommand(self, new_spec: Specialization) -> list[str]:
