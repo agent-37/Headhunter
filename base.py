@@ -47,3 +47,20 @@ class Base:
             self.add_new_profile(new_prof, list_of_spec)
         f_prof.close()
 
+    def find_profile_by_id(self, new_id: int) -> int:
+        # Функция находит по id индекс профиля в базе данных, если такого нет, то возвращает -1
+        for prof in range(len(self.data_base)):
+            if self.data_base[prof] == new_id:
+                return prof
+
+        return -1
+
+    def delete_profile_by_id(self, new_id: int) -> bool:
+        # Функция по выбранному id удаляет профиль в базе данных, если он там был и собственно сообщает о результате
+        # в виде bool
+        result = self.find_profile_by_id(new_id)
+        if result == -1:
+            return False
+        else:
+            self.data_base.pop(result)
+            return True
