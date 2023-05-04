@@ -5,12 +5,15 @@ from list_of_specialization import List_of_specialization
 
 class Base:
     # это база профилей(анкет), добавленных на сайт
+    # Свободный id для новой анкеты
     data_base = []
+    free_id = 0
 
     def add_new_profile(self, new_profile: Profile, list_of_spec: List_of_specialization):
         # добавление нового профиля, если он пройдёт проверку
         if new_profile.check_all_spec_correct(list_of_spec):
             self.data_base.append(new_profile)
+            self.free_id += 1
         else:
             with open('exeptions.txt', 'a') as exeption_file:
                 exeption_file.write('Найден человек: ' + new_profile.name + 'с неопознанной специализацией' + '\n')
@@ -40,7 +43,7 @@ class Base:
                 unique_skills.append(f_prof.readline()[: -1])
             stars = list(map(int, f_prof.readline().split(', ')))
             new_prof = Profile(name, placer, spec, salary, place_work, name_education, level_education, unique_skills,
-                               stars)
+                               self.free_id, stars)
             self.add_new_profile(new_prof, list_of_spec)
         f_prof.close()
 
