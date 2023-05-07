@@ -154,9 +154,3 @@ class Profile:
                                         'Например: Водительские права категории\n' +
                                         'Если нет таковых оставьте это поле пустым').split(', '))
 
-
-l = List_of_specialization()
-l.read_from_file()
-proba  = Profile('123', '312',[],123,[],'123',123,[],123)
-proba.read_from_console(l)
-
