@@ -1,6 +1,7 @@
 from profile import Profile
 from specialization import Specialization
 from list_of_specialization import List_of_specialization
+from filter import Filter
 
 
 class Base:
@@ -64,3 +65,25 @@ class Base:
         else:
             self.data_base.pop(result)
             return True
+
+    def sift(self, filter: Filter) -> 'Base':
+        # просеивание базы данных для поиска подходящих анкет, функция возвращает новую, просеенную базу данных
+        # если база данных получится пустая, то этот момент будет обработан при её получении
+        sifted_data_base = Base()
+        sifted_data_base.free_id = self.free_id
+        for current_profile in self.data_base:
+            if current_profile.test_worthiness(filter):
+                sifted_data_base.data_base.append(current_profile)
+        return  sifted_data_base
+
+    def sort(self, filter: Filter):
+        # !!! заглушка для сортировки после просеивания
+
+    def sift_and_sort(self, filter: Filter) -> 'Base':
+        # просеивание и сортировка базы данных, функция возвращает новую базу данных,
+        # просеенную и отсортированную базу данных
+        new_data_base = self.sift(filter)
+        new_data_base.sort(filter)
+        return new_data_base
+
+
