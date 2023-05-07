@@ -22,7 +22,7 @@ class Base:
         f_prof = open('input_file_of_profiles.txt')
         while f_prof.readline() != '':
             name = f_prof.readline()[: -1]
-            placer = f_prof.readline()[: -1]
+            placer = int(f_prof.readline()[: -1])
             buff = int(f_prof.readline())
             spec = []
             for i in range(buff):
