@@ -94,6 +94,8 @@ class Profile:
         return True
 
     def read_from_console(self, list_of_spec: List_of_specialization):
+        # Функция читает из консоли информацию для анкеты,
+        # Функция сделана с проверками для дурака, но не факт что со всеми возможными
         self.name = input('Ведите ФИО или название вашей Организации\n')
         placer = input('Ведите "соискатель" или "организация"\n')
         while placer != 'соискатель' and placer != 'организация':
