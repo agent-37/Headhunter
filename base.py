@@ -10,14 +10,16 @@ class Base:
     data_base = []
     free_id = 0
 
-    def add_new_profile(self, new_profile: Profile, list_of_spec: List_of_specialization):
+    def add_new_profile(self, new_profile: Profile, list_of_spec: List_of_specialization) -> bool:
         # добавление нового профиля, если он пройдёт проверку
         if new_profile.check_all_spec_correct(list_of_spec):
             self.data_base.append(new_profile)
             self.free_id += 1
+            return True
         else:
             with open('exeptions.txt', 'a') as exeption_file:
                 exeption_file.write('Найден человек: ' + new_profile.name + 'с неопознанной специализацией' + '\n')
+            return False
 
     def read_profile_from_file(self, list_of_spec: List_of_specialization):
         f_prof = open('input_file_of_profiles.txt')
