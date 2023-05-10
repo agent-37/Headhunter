@@ -60,16 +60,26 @@ class Profile:
             print('Работодатель')
         # Проблема с предлагаемой работой и стажем, доделать чуть позднее
         print('Предлагаемая заработная плата: ', self.salary)
-        # Опять проблема с листом городов, доделать позднее
+        print('Города: ', end=' ')
+        for i in range(len(self.place_work) - 2):
+            print(self.place_work[i], ', ', end=' ')
+        print(self.place_work[len(self.place_work) - 1])
         if self.placer == 0:
             print('Законченное учебное заведение: ', self.name_education)
         print('Уровень образования: ', end=' ')
         match self.level_education:
+            case(0): print('отсутствует')
             case(1): print('основное общее (9 классов)')
             case(2): print('среднее общее (11 классов)')
             case(3): print('среднее профессиональное')
             case(4): print('высшее')
-        # Лист особых умений и оценки, потом доделать
+        print('Особые умения:')
+        for i in range(len(self.unique_skills) - 1):
+            print(self.unique_skills[i])
+        print('Оценки аккаунта: ', end=' ')
+        for i in range(3):
+            print(self.stars[i], ', ', end=' ')
+            print(self.stars[4])
 
 
     def test_worthiness(self, filter: Filter) -> bool:
