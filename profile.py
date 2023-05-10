@@ -50,8 +50,8 @@ class Profile:
         self.id = id
         self.stars = stars
 
-    def print_info(self):
-        # Функция для вывода информации о профиле в консоль
+    def print_all_info(self):
+        # Функция для вывода всей информации о профиле в консоль
         if self.placer == 0:
             print('Имя пользователя: ', self.name)
             print('Работник')
@@ -81,6 +81,21 @@ class Profile:
             print(self.stars[i], ', ', end=' ')
             print(self.stars[4])
 
+    def print_some_info(self):
+        # Функция для вывода частичной информации о профиле в консоль
+        if self.placer == 0:
+            print('Имя пользователя: ', self.name)
+            print('Работник')
+        else:
+            print('Название организации: ', self.name)
+            print('Работодатель')
+        print('Предлагаемая работа:')
+        for i in range(len(self.spec) - 1):
+            print(self.spec[i])
+        print('Города: ', end=' ')
+        for i in range(len(self.place_work) - 2):
+            print(self.place_work[i], ', ', end=' ')
+        print(self.place_work[len(self.place_work) - 1])
 
     def test_worthiness(self, filter: Filter) -> bool:
         # проверка на то, что профиль подходит под условия заданные пользователем(filter)
