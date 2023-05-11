@@ -17,8 +17,8 @@ class List_of_specialization:
         # чтение специализаций из файла с проверкой повторений
         with open('input_file_of_specialization.txt') as f_spec:
             file_str = f_spec.readline()
-            self.add_specialization(Specialization(list(file_str.split(', '))))
+            self.add_specialization(Specialization(list(file_str.split())))
             while file_str:
                 file_str = f_spec.readline()
-                self.add_specialization(Specialization(list(file_str.split(', '))))
+                self.add_specialization(Specialization(list(file_str.split())))
 
