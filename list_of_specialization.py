@@ -1,5 +1,6 @@
 from specialization import Specialization
 
+
 class List_of_specialization:
     specializations = []
 
@@ -16,9 +17,16 @@ class List_of_specialization:
     def read_from_file(self):
         # чтение специализаций из файла с проверкой повторений
         with open('input_file_of_specialization.txt') as f_spec:
-            file_str = f_spec.readline()
-            self.add_specialization(Specialization(list(file_str.split())))
+            file_str = f_spec.readline()[:-1]
+            self.add_specialization(Specialization(list(file_str.split(', '))))
             while file_str:
-                file_str = f_spec.readline()
-                self.add_specialization(Specialization(list(file_str.split())))
+                file_str = f_spec.readline()[:-1]
+                self.add_specialization(Specialization(list(file_str.split(', '))))
 
+    def reduce_find_recommand(self, new_spec: Specialization) -> set[str]:
+        # Функция по заданной специализации пытается найти какое-нибудь уточнение этой специализации
+        answer = set()
+        for spec in self.specializations:
+            if spec.is_nested(new_spec) and len(spec.profession) != len(new_spec.profession):
+                answer.add(spec.profession[len(new_spec.profession)])
+        return answer
