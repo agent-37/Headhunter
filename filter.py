@@ -14,7 +14,7 @@ class Filter:
     place_work = None
     level_education = None
     unique_skills = None
-    kind_of_sort = 'name_up'
+    parameter_of_sort = 'name_up'
 
     def add_spec(self, new_spec: str) -> None:
         # Добавляет элемент в специализацию для фильтра
