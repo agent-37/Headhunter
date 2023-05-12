@@ -53,49 +53,58 @@ class Profile:
     def print_all_info(self):
         # Функция для вывода всей информации о профиле в консоль
         if self.placer == 0:
-            print('Имя пользователя: ', self.name)
-            print('Работник')
+            print('Имя пользователя:', self.name)
+            print('Соискатель')
         else:
-            print('Название организации: ', self.name)
+            print('Название организации:', self.name)
             print('Работодатель')
-        # Проблема с предлагаемой работой и стажем, доделать чуть позднее
-        print('Предлагаемая заработная плата: ', self.salary)
-        print('Города: ', end=' ')
-        for i in range(len(self.place_work) - 2):
-            print(self.place_work[i], ', ', end=' ')
-        print(self.place_work[len(self.place_work) - 1])
+        print('Предлагаемая работа:')
+        for vocation in self.spec:
+            print(vocation.profession)
+            if self.placer == 0:
+                print('Стаж:', vocation.work_exp_max, 'лет')
+            else:
+                print('Стаж: от', vocation.work_exp_min, 'до', vocation.work_exp_max, 'лет')
+        print('Предлагаемая заработная плата:', self.salary)
+        print('Города:', end=' ')
+        for town in self.place_work:
+            print(town, sep=', ')
         if self.placer == 0:
-            print('Законченное учебное заведение: ', self.name_education)
-        print('Уровень образования: ', end=' ')
+            print('Законченное учебное заведение:', self.name_education)
+        print('Уровень образования:', end=' ')
         match self.level_education:
             case(0): print('отсутствует')
             case(1): print('основное общее (9 классов)')
             case(2): print('среднее общее (11 классов)')
             case(3): print('среднее профессиональное')
-            case(4): print('высшее')
+            case(4): print('высшее I степени (бакалавриат)')
+            case(5): print('высшее II степени (специалитет, магистратура)')
+            case(6): print('высшее III степени (подготовка кадров высшей квалификации)')
         print('Особые умения:')
-        for i in range(len(self.unique_skills) - 1):
-            print(self.unique_skills[i])
-        print('Оценки аккаунта: ', end=' ')
-        for i in range(3):
-            print(self.stars[i], ', ', end=' ')
-            print(self.stars[4])
+        if len(self.unique_skills) == 0:
+            print('информация отсутствует')
+        else:
+            for skill in self.unique_skills:
+                print(skill)
+        print('Оценки аккаунта:', end=' ')
+        for idx in range(5): #визуал другой
+            print(self.stars[idx], sep=', ')
 
     def print_some_info(self):
         # Функция для вывода частичной информации о профиле в консоль
         if self.placer == 0:
-            print('Имя пользователя: ', self.name)
-            print('Работник')
+            print('Имя пользователя:', self.name)
+            print('Соискатель')
         else:
-            print('Название организации: ', self.name)
+            print('Название организации:', self.name)
             print('Работодатель')
         print('Предлагаемая работа:')
-        for i in range(len(self.spec) - 1):
-            print(self.spec[i])
-        print('Города: ', end=' ')
-        for i in range(len(self.place_work) - 2):
-            print(self.place_work[i], ', ', end=' ')
-        print(self.place_work[len(self.place_work) - 1])
+        for vocation in self.spec:
+            print(vocation.profession)
+        print('Предлагаемая заработная плата:', self.salary)
+        print('Города:', end=' ')
+        for town in self.place_work:
+            print(town, sep=', ')
 
     def test_worthiness(self, filter: Filter) -> bool:
         # проверка на то, что профиль подходит под условия заданные пользователем(filter)
@@ -195,4 +204,5 @@ class Profile:
         self.unique_skills = list(input('Введите через запятую уникальные умения или возможности\n' +
                                         'Например: Водительские права категории\n' +
                                         'Если нет таковых оставьте это поле пустым').split(', '))
+
 
