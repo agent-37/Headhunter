@@ -60,7 +60,7 @@ class Profile:
             print('Работодатель')
         print('Предлагаемая работа:')
         for vocation in self.spec:
-            print(vocation.profession)
+            vocation.print_specialization()
             if self.placer == 0:
                 print('Стаж:', vocation.work_exp_max, 'лет')
             else:
@@ -100,7 +100,7 @@ class Profile:
             print('Работодатель')
         print('Предлагаемая работа:')
         for vocation in self.spec:
-            print(vocation.profession)
+            vocation.print_specialization()
         print('Предлагаемая заработная плата:', self.salary)
         print('Города:', end=' ')
         for town in self.place_work:
