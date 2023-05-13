@@ -7,8 +7,9 @@ from filter import Filter
 class Base:
     # это база профилей(анкет), добавленных на сайт
     # Свободный id для новой анкеты
-    data_base = []
-    free_id = 0
+    def __init__(self):
+        self.data_base = []
+        self.free_id = 0
 
     def add_new_profile(self, new_profile: Profile, list_of_spec: List_of_specialization) -> bool:
         # добавление нового профиля, если он пройдёт проверку
@@ -76,7 +77,7 @@ class Base:
         for current_profile in self.data_base:
             if current_profile.test_worthiness(filter):
                 sifted_data_base.data_base.append(current_profile)
-        return  sifted_data_base
+        return sifted_data_base
 
     def sort_data_base(self, filter: Filter) -> 'Base':
         # функция сортировки фильтра по определённому параметру,
