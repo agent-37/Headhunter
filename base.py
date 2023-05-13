@@ -88,13 +88,13 @@ class Base:
         # в случае исключения ошибка будет выведена в exeption
         sorted_data_base = Base()
         match filter.parameter_of_sort:
-            case 'name_up': sorted_data_base = sorted(self.data_base, key=lambda prof: prof.name)
-            case 'name_down': sorted_data_base = sorted(self.data_base, key=lambda prof: prof.name, reverse=True)
-            case 'salary_up': sorted_data_base = sorted(self.data_base, key=lambda prof: prof.salary)
-            case 'salary_down': sorted_data_base = sorted(self.data_base, key=lambda prof: prof.salary, reverse=True)
-            case 'level_education_up': sorted_data_base = sorted(self.data_base, key=lambda prof: prof.level_education)
+            case 'name_up': sorted_data_base.data_base = sorted(self.data_base, key=lambda prof: prof.name)
+            case 'name_down': sorted_data_base.data_base = sorted(self.data_base, key=lambda prof: prof.name, reverse=True)
+            case 'salary_up': sorted_data_base.data_base = sorted(self.data_base, key=lambda prof: prof.salary)
+            case 'salary_down': sorted_data_base.data_base = sorted(self.data_base, key=lambda prof: prof.salary, reverse=True)
+            case 'level_education_up': sorted_data_base.data_base = sorted(self.data_base, key=lambda prof: prof.level_education)
             case 'level_education_down':
-                sorted_data_base = sorted(self.data_base, key=lambda prof: prof.level_education, reverse=True)
+                sorted_data_base.data_base = sorted(self.data_base, key=lambda prof: prof.level_education, reverse=True)
             case _:
                 with open('exeptions.txt', 'a') as exeption_file:
                     exeption_file.write('Некорректно введён параметр сортировки: \n')
