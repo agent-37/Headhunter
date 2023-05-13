@@ -31,3 +31,7 @@ class Specialization:
         if len(self.profession) != 0:
             self.profession.pop()
 
+    def print_specialization(self):
+        for position in range(len(self.profession)-1):
+            print(self.profession[position], end=', ')
+        print(self.profession[-1])
