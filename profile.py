@@ -117,20 +117,21 @@ class Profile:
                 or filter.place_work is not None and filter.place_work not in self.place_work \
                 or filter.level_education is not None and filter.level_education > self.level_education:
             return False
+        if filter.unique_skills is not None:
+            count_unique_skills = 0
+            for skill in self.unique_skills:
+                for need_skill in filter.unique_skills:
+                    if need_skill == skill:
+                        count_unique_skills += 1
+                        break
 
-        count_unique_skills = 0
-        for skill in self.unique_skills:
-            for need_skill in filter.unique_skills:
-                if need_skill == skill:
-                    count_unique_skills += 1
-                    break
+            if count_unique_skills != len(filter.unique_skills):
+                return False
 
-        if count_unique_skills != len(filter.unique_skills):
-            return False
 
         if filter.spec is not None:
             for one_spec in self.spec:
-                if filter.spec.is_nested(one_spec):
+                if one_spec.is_nested(filter.spec):
                     return True
 
         return False
