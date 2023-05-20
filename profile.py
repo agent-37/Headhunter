@@ -74,8 +74,9 @@ class Profile:
                     print('Стаж: от', vocation.work_exp_min, 'до', vocation.work_exp_max, 'лет')
         print('Предлагаемая заработная плата:', self.salary)
         print('Города:', end=' ')
-        for town in self.place_work:
-            print(self.place_work, sep=', ')
+        for idx in range(len(self.place_work)-1):
+            print(self.place_work[idx], end=', ')
+        print(self.place_work[-1])
         if self.placer == 0:
             print('Законченное учебное заведение:', self.name_education)
         print('Уровень образования:', end=' ')
@@ -94,8 +95,8 @@ class Profile:
             for skill in self.unique_skills:
                 print(skill)
         print('Оценки аккаунта:', end=' ')
-        for idx in range(5): #визуал другой
-            print(self.stars[idx], sep=', ')
+        for idx in range(5):
+            print(idx,':', '*' * self.stars.count(idx))
 
     def print_some_info(self):
         # Функция для вывода частичной информации о профиле в консоль
@@ -110,8 +111,9 @@ class Profile:
             vocation.print_specialization()
         print('Предлагаемая заработная плата:', self.salary)
         print('Города:', end=' ')
-        for town in self.place_work:
-            print(town, sep=', ')
+        for idx in range(len(self.place_work) - 1):
+            print(self.place_work[idx], end=', ')
+        print(self.place_work[-1])
 
     def test_worthiness(self, filter: Filter) -> bool:
         # проверка на то, что профиль подходит под условия заданные пользователем(filter)
