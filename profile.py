@@ -64,11 +64,18 @@ class Profile:
             if self.placer == 0:
                 print('Стаж:', vocation.work_exp_max, 'лет')
             else:
-                print('Стаж: от', vocation.work_exp_min, 'до', vocation.work_exp_max, 'лет')
+                if vocation.work_exp_min == 0 and vocation.work_exp_max == 100:
+                    print('Стаж: не важен')
+                elif vocation.work_exp_min == 0:
+                    print('Стаж: до', vocation.work_exp_max, 'лет')
+                elif vocation.work_exp_max == 100:
+                    print('Стаж: от', vocation.work_exp_min, 'лет')
+                else:
+                    print('Стаж: от', vocation.work_exp_min, 'до', vocation.work_exp_max, 'лет')
         print('Предлагаемая заработная плата:', self.salary)
         print('Города:', end=' ')
         for town in self.place_work:
-            print(town, sep=', ')
+            print(self.place_work, sep=', ')
         if self.placer == 0:
             print('Законченное учебное заведение:', self.name_education)
         print('Уровень образования:', end=' ')
