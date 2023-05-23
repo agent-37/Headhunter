@@ -97,3 +97,22 @@ class Filter:
                 case '2': self.name = input('Введите ФИО или название организации')
                 case '3': break
                 case _: print('Команда не была распознана. Попытайтесь еще раз')
+
+    def change_placer_from_console(self):
+        # Функция смены placer с консоли
+        print('''1. Удаление работодатель-соискатель
+                 2. Изменение работодатель-соискатель
+                 3. Выход''')
+        while True:
+            console_input = input()
+            match console_input:
+                case '1': self.placer = None
+                case '2':
+                    while True:
+                        console_input = input()
+                        match console_input:
+                            case '0': self.placer = int(console_input)
+                            case '1': self.placer = int(console_input)
+                            case _: print('Команда не была распознана. Попытайтесь еще раз')
+                case '3': break
+                case _: print('Команда не была распознана. Попытайтесь еще раз')
