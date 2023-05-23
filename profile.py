@@ -47,6 +47,7 @@ class Profile:
         self.unique_skills = []
         self.id = 0
         self.stars = [0, 0, 0, 0, 0]
+        self.feedback_added = 0
 
     def setter(self, name: str, placer: int, spec: list[Specialization], salary: float, place_work: list,
                  name_education: str, level_education: int, unique_skills: list[str], id: int, stars=None):
@@ -62,6 +63,7 @@ class Profile:
         self.unique_skills = unique_skills
         self.id = id
         self.stars = stars
+
     def print_all_info(self):
         # Функция для вывода всей информации о профиле в консоль
         if self.placer == 0:
