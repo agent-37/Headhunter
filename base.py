@@ -56,7 +56,7 @@ class Base:
     def find_profile_by_id(self, new_id: int) -> int:
         # Функция находит по id индекс профиля в базе данных, если такого нет, то возвращает -1
         for prof in range(len(self.data_base)):
-            if self.data_base[prof] == new_id:
+            if self.data_base[prof].id == new_id:
                 return prof
 
         return -1
