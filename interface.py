@@ -18,7 +18,7 @@ class Interface:
     def upload_spec_from_file(self):
         self.all_spec.read_from_file()
 
-    def change_filter(self):
+    def change_filter(self, list_of_spec: List_of_specialization):
         # Функция для изменения пользователем фильтра.
         # Есть много проверок на дебила
         print('Выберите, как вы хотели бы изменить фильтр(введите цифру без точки)', '1. Удалить все параметры фильтра',
@@ -40,7 +40,7 @@ class Interface:
                     match input_command:
                         case '1': self.filter.change_name_from_console()
                         case '2': self.filter.change_placer_from_console()
-                        case '3': self.filter.change_spec_from_console()
+                        case '3': self.filter.change_spec_from_console(list_of_spec)
                         case '4': self.filter.change_min_salary_from_console()
                         case '5': self.filter.change_max_salary_from_console()
                         case '6': self.filter.change_place_work_from_console()
