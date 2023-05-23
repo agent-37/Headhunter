@@ -14,6 +14,7 @@ class Base:
     def add_new_profile(self, new_profile: Profile, list_of_spec: List_of_specialization) -> bool:
         # добавление нового профиля, если он пройдёт проверку
         if new_profile.check_all_spec_correct(list_of_spec):
+            new_profile.id = self.free_id
             self.data_base.append(new_profile)
             self.free_id += 1
             return True
