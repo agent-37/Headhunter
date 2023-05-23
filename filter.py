@@ -204,16 +204,14 @@ class Filter:
             match console_input:
                 case '1': self.level_education = None
                 case '2':
-                    # !!нужно уведомить с какого по какое число
                     while True:
                         console_input = input('Введите уровень образования')
                         if not is_int(console_input):
-                            print('Нужно ввести целое число от 0 до 10')
+                            print('Нужно ввести целое число от 0 до 6')
                             continue
                         console_input = int(console_input)
-                        # !!вот в этом моменте возможно придется менять
-                        if console_input < 0 or console_input > 10:
-                            print('Нужно ввести число от 0 до 10')
+                        if console_input < 0 or console_input > 6:
+                            print('Нужно ввести число от 0 до 6')
                             continue
                         break
                     self.level_education = console_input
@@ -252,3 +250,23 @@ class Filter:
                         self.unique_skills.append(input('Введите особое умение'))
                 case '4': break
                 case _: print('Команда не была распознана. Попытайтесь еще раз')
+
+    def change_parameter_of_sort_from_console(self):
+        # Функция изменения сортировки
+        print('1. По возрастанию имен', '2. По убыванию имен', '3. По возрастанию заработной платы',
+              '4. По убыванию заработной платы', '5. По возрастанию уровня образования',
+              '6. По убыванию уровня образования', '7. Выход',
+              sep='\n')
+        while True:
+            console_input = input()
+            match console_input:
+                case '1': self.parameter_of_sort = 'name_up'
+                case '2': self.parameter_of_sort = 'name_down'
+                case '3': self.parameter_of_sort = 'salary_up'
+                case '4': self.parameter_of_sort = 'salary_down'
+                case '5': self.parameter_of_sort = 'level_education_up'
+                case '6': self.parameter_of_sort = 'level_education_down'
+                case '7': break
+                case _: print('Команда не была распознана. Попытайтесь еще раз')
+
+
