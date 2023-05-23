@@ -46,7 +46,8 @@ class Base:
             for i in range(buff):
                 unique_skills.append(f_prof.readline()[: -1])
             stars = list(map(int, f_prof.readline().split(', ')))
-            new_prof = Profile(name, placer, spec, salary, place_work, name_education, level_education, unique_skills,
+            new_prof = Profile()
+            new_prof.setter(name, placer, spec, salary, place_work, name_education, level_education, unique_skills,
                                self.free_id, stars)
             self.add_new_profile(new_prof, list_of_spec)
         f_prof.close()

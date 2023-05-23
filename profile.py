@@ -28,8 +28,7 @@ def is_int(element: any) -> bool:
 class Profile:
     # Это класс в котором будет храниться информация о профиле вакансии
     # или человека ищущего работу
-    def __init__(self, name: str, placer: int, spec: list[Specialization], salary: float, place_work: list,
-                 name_education: str, level_education: int, unique_skills: list[str], id: int, stars=None):
+    def __init__(self):
         # Это конструктор для класса Profile. name- ФИО, placer - соискатель объявления(компания или человек)
         # spec - специализация это будет лист в виде профессии и ее сужения
         # salary - зарплата, place_work - место где может работать(листом т.к. можно работать в разных городах)
@@ -37,7 +36,21 @@ class Profile:
         # name_education, level_education - название и степень полученная образования
         # unique_skills- уникальные умения (водительские права, права на ношение оружия и тд)
         # id - уникальный номер для профиля, stars - оценки
+        # ИЗНАЧАЛЬНО ДАННЫЕ МУСОРНЫЕ
+        self.name = ''
+        self.placer = 0
+        self.spec = None
+        self.salary = 0
+        self.place_work = ''
+        self.name_education = ''
+        self.level_education = 0
+        self.unique_skills = []
+        self.id = 0
+        self.stars = [0, 0, 0, 0, 0]
 
+    def setter(self, name: str, placer: int, spec: list[Specialization], salary: float, place_work: list,
+                 name_education: str, level_education: int, unique_skills: list[str], id: int, stars=None):
+        # Это сеттер
         self.name = name
         self.placer = placer
         self.spec = spec
@@ -49,7 +62,6 @@ class Profile:
         self.unique_skills = unique_skills
         self.id = id
         self.stars = stars
-
     def print_all_info(self):
         # Функция для вывода всей информации о профиле в консоль
         if self.placer == 0:
