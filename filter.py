@@ -84,3 +84,16 @@ class Filter:
         if not self.check_correct():
             print('Введенной информации не достаточно для нахождения анкет.')
             print('Убедитесь, что ввели параметры работодатель-соискатель и специализации')
+
+    def change_name_from_console(self):
+        # Функция смены имени с консоли
+        print('''1. Удаление ФИО или название организации
+                 2. Изменение ФИО или названия организации
+                 3. Выход''')
+        while True:
+            console_input = input()
+            match console_input:
+                case '1': self.name = None
+                case '2': self.name = input('Введите ФИО или название организации')
+                case '3': break
+                case _: print('Команда не была распознана. Попытайтесь еще раз')
