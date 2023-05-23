@@ -215,6 +215,40 @@ class Filter:
                         if console_input < 0 or console_input > 10:
                             print('Нужно ввести число от 0 до 10')
                             continue
+                        break
                     self.level_education = console_input
                 case '3': break
+                case _: print('Команда не была распознана. Попытайтесь еще раз')
+
+    def change_unique_skills_from_console(self):
+        # Функция изменения особых умений
+        print('1. Удаление всех особых умений', '2. Удаление одного особого умения', '3. Добавление умения', '4. Выход',
+              sep='\n')
+        while True:
+            console_input = input()
+            match console_input:
+                case '1': self.unique_skills = None
+                case '2':
+                    if self.unique_skills is None:
+                        print('Особых умений нет')
+                        continue
+                    while True:
+                        console_input = input('Введите номер удаляемого объекта')
+                        if not is_int(console_input):
+                            print('Введите целое положительное число')
+                            continue
+                        console_input = int(console_input)
+                        if console_input < 1 or console_input > len(self.unique_skills):
+                            print('Введите целое положительное число из диапазона')
+                            continue
+                        break
+                    self.unique_skills.pop(console_input - 1)
+                    if len(self.unique_skills) == 0:
+                        self.unique_skills = None
+                case '3':
+                    if self.unique_skills is None:
+                        self.unique_skills = [input('Введите особое умение')]
+                    else:
+                        self.unique_skills.append(input('Введите особое умение'))
+                case '4': break
                 case _: print('Команда не была распознана. Попытайтесь еще раз')
