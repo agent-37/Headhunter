@@ -10,6 +10,15 @@ def is_float(element: any) -> bool:
     except ValueError:
         return False
 
+def is_int(element: any) -> bool:
+    # Проверка, того что элемент это целое число
+    if element is None:
+        return False
+    try:
+        int(element)
+        return True
+    except ValueError:
+        return False
 
 class Filter:
     # Это класс в котором будет храниться информация о фильтре для отсеивания нужных и не нужных людей
@@ -184,5 +193,28 @@ class Filter:
             match console_input:
                 case '1': self.place_work = None
                 case '2': self.name = input('Введите место работы')
+                case '3': break
+                case _: print('Команда не была распознана. Попытайтесь еще раз')
+
+    def change_level_education_from_console(self):
+        # Функция смены места работы с консоли
+        print('1. Удаление уровня образования', '2. Изменение уровня образования', '3. Выход', sep='\n')
+        while True:
+            console_input = input()
+            match console_input:
+                case '1': self.level_education = None
+                case '2':
+                    # !!нужно уведомить с какого по какое число
+                    while True:
+                        console_input = input('Введите уровень образования')
+                        if not is_int(console_input):
+                            print('Нужно ввести целое число от 0 до 10')
+                            continue
+                        console_input = int(console_input)
+                        # !!вот в этом моменте возможно придется менять
+                        if console_input < 0 or console_input > 10:
+                            print('Нужно ввести число от 0 до 10')
+                            continue
+                    self.level_education = console_input
                 case '3': break
                 case _: print('Команда не была распознана. Попытайтесь еще раз')
