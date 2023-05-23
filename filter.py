@@ -1,5 +1,15 @@
 from specialization import Specialization
-from profile import is_float
+
+def is_float(element: any) -> bool:
+    # Проверка, того что элемент это число с плавающей запятой
+    if element is None:
+        return False
+    try:
+        float(element)
+        return True
+    except ValueError:
+        return False
+
 
 class Filter:
     # Это класс в котором будет храниться информация о фильтре для отсеивания нужных и не нужных людей
@@ -87,9 +97,8 @@ class Filter:
 
     def change_name_from_console(self):
         # Функция смены имени с консоли
-        print('''1. Удаление ФИО или название организации
-                 2. Изменение ФИО или названия организации
-                 3. Выход''')
+        print('1. Удаление ФИО или название организации', '2. Изменение ФИО или названия организации',
+              '3. Выход', sep='\n')
         while True:
             console_input = input()
             match console_input:
@@ -100,9 +109,7 @@ class Filter:
 
     def change_placer_from_console(self):
         # Функция смены placer с консоли
-        print('''1. Удаление работодатель-соискатель
-                 2. Изменение работодатель-соискатель
-                 3. Выход''')
+        print('1. Удаление работодатель-соискатель', '2. Изменение работодатель-соискатель', '3. Выход', sep='\n')
         while True:
             console_input = input()
             match console_input:
@@ -119,9 +126,8 @@ class Filter:
 
     def change_min_salary_from_console(self):
         # Функция смены минимальной зп с консоли
-        print('''1. Удаление параметра минимальной заработной платы
-                 2. Изменение параметра минимальной заработной платы
-                 3. Выход''')
+        print('1. Удаление параметра минимальной заработной платы',
+              '2. Изменение параметра минимальной заработной платы', '3. Выход', sep='\n')
         while True:
             console_input = input()
             match console_input:
@@ -146,9 +152,8 @@ class Filter:
 
     def change_max_salary_from_console(self):
         # Функция смены максимальной зп с консоли
-        print('''1. Удаление параметра максимальной заработной платы
-                 2. Изменение параметра максимальной заработной платы
-                 3. Выход''')
+        print('1. Удаление параметра максимальной заработной платы',
+              '2. Изменение параметра максимальной заработной платы', '3. Выход', sep='\n')
         while True:
             console_input = input()
             match console_input:
@@ -168,5 +173,16 @@ class Filter:
                             continue
                         break
                     self.max_salary = console_input
+                case '3': break
+                case _: print('Команда не была распознана. Попытайтесь еще раз')
+
+    def change_place_work_from_console(self):
+        # Функция смены места работы с консоли
+        print('1. Удаление места работы', '2. Изменение места работы', '3. Выход', sep='\n')
+        while True:
+            console_input = input()
+            match console_input:
+                case '1': self.place_work = None
+                case '2': self.name = input('Введите место работы')
                 case '3': break
                 case _: print('Команда не была распознана. Попытайтесь еще раз')
