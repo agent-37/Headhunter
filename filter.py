@@ -1,5 +1,5 @@
 from specialization import Specialization
-
+from profile import is_float
 
 class Filter:
     # Это класс в котором будет храниться информация о фильтре для отсеивания нужных и не нужных людей
@@ -114,5 +114,31 @@ class Filter:
                             case '0': self.placer = int(console_input)
                             case '1': self.placer = int(console_input)
                             case _: print('Команда не была распознана. Попытайтесь еще раз')
+                case '3': break
+                case _: print('Команда не была распознана. Попытайтесь еще раз')
+    def change_min_salary_from_console(self):
+        # Функция смены минимальной зп с консоли
+        print('''1. Удаление параметра минимальной заработной платы
+                 2. Изменение параметра минимальной заработной платы
+                 3. Выход''')
+        while True:
+            console_input = input()
+            match console_input:
+                case '1': self.min_salary = None
+                case '2':
+                    while True:
+                        console_input = input('Введите минимальную заработной платы')
+                        if not is_float(console_input):
+                            print('Минимальная заработная плата это вещественное число')
+                            continue
+                        console_input = float(console_input)
+                        if console_input <= 0:
+                            print('Минимальная заработная плата должна быть положительной')
+                            continue
+                        if self.max_salary is not None and self.min_salary > self.max_salary:
+                            print('Минимальная заработная плата должна быть не больше максимальной')
+                            continue
+                        break
+                    self.min_salary = console_input
                 case '3': break
                 case _: print('Команда не была распознана. Попытайтесь еще раз')
