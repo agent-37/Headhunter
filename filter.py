@@ -5,7 +5,7 @@ class Filter:
     # Это класс в котором будет храниться информация о фильтре для отсеивания нужных и не нужных людей
     # Параметры в фильтре такие же как и в анкете, но часть из них может отсутствовать или быть не полной
     # Так же скажу, что setter и getter для переменных не имеет смысла делать, потому что легче сделать их публичными
-    # kind_of_sort - это тип сортировок
+    # parameter_of_sort - это тип сортировок
     name = None
     placer = None
     spec = None
@@ -45,3 +45,42 @@ class Filter:
             return True
         else:
             return False
+
+    def print_filter_info(self):
+        # Функция выводит информацию о фильтре
+        if self.name is not None:
+            print('ФИО или название работодателя:' + self.name)
+        if self.placer is not None:
+            if self.placer == 1:
+                print('Работодатель')
+            if self.placer == 0:
+                print('Соискатель')
+        if self.spec is not None:
+            print('Специализация:', end=' ')
+            self.spec.print_specialization()
+        if self.min_salary is not None:
+            print('Минимальная заработная плата:', self.min_salary)
+        if self.max_salary is not None:
+            print('Минимальная заработная плата:', self.max_salary)
+        if self.place_work is not None:
+            print('Город:', self.place_work)
+        if self.level_education is not None:
+            print('Уровень образования:', self.level_education)
+        if self.unique_skills is not None:
+            print('Особые умения')
+            for skill in self.unique_skills:
+                print(skill)
+        print('Тип сортировки:', end='')
+        match self.parameter_of_sort:
+            case 'name_up': print('по возрастанию имени')
+            case 'name_down': print('по убыванию имени')
+            case 'salary_up': print('по возрастанию заработной платы')
+            case 'salary_down': print('по убыванию заработной платы')
+            case 'level_education_up': print('по возрастанию уровня образования')
+            case 'level_education_down': print('по убыванию уровня образования')
+            case _:
+                with open('exeptions.txt', 'a') as exeption_file:
+                    exeption_file.write('Некорректно обработан параметр сортировки при выводе фильтра \n')
+        if not self.check_correct():
+            print('Введенной информации не достаточно для нахождения анкет.')
+            print('Убедитесь, что ввели параметры работодатель-соискатель и специализации')
