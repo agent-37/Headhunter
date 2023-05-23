@@ -1,5 +1,5 @@
 from specialization import Specialization
-
+from list_of_specialization import  List_of_specialization
 def is_float(element: any) -> bool:
     # Проверка, того что элемент это число с плавающей запятой
     if element is None:
@@ -269,4 +269,31 @@ class Filter:
                 case '7': break
                 case _: print('Команда не была распознана. Попытайтесь еще раз')
 
-
+    def change_spec_from_console(self, list_of_spec: List_of_specialization):
+        # Функция изменения сортировки
+        print('1. Удалить специализацию', '2.уточнить специализацию', '3. Выход', sep='\n')
+        while True:
+            console_input = input()
+            match console_input:
+                case '1': self.spec = None
+                case '2':
+                    local_spec = Specialization([''])
+                    if self.spec is not None:
+                        local_spec = self.spec
+                    chosen_spec = list_of_spec.reduce_find_recommand(local_spec)
+                    if len(chosen_spec) == 0:
+                        print('Уточнее сделать не возможно')
+                    else:
+                        print('Возможные уточнения:')
+                        for pos in chosen_spec:
+                            print(pos)
+                    while True:
+                        console_input = input()
+                        if console_input in chosen_spec:
+                            local_spec.profession.append(console_input)
+                            self.spec = local_spec
+                            break
+                        else:
+                            print('Не распознанное уточнение. Попытайтесь еще раз')
+                case '3': break
+                case _: print('Команда не была распознана. Попытайтесь еще раз')
