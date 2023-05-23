@@ -73,4 +73,38 @@ class Interface:
             num = input('Введите корректный номер позиции профиля: ')
         self.data_base.delete_profile_by_id(visible_base.data_base[int(num)-1].id)
 
-
+    def open_and_interaction_profile(self):
+        # функция открывает профиль для просмотра и взаимодействия с пользователем
+        num = input('Введите номер позиции профиля: ')
+        visible_base = self.data_base.sift_and_sort(self.filter)
+        if len(visible_base.data_base) == 0:
+            print('Список анкет пуст ')
+            return
+        while not is_int(num) or 0 >= int(num) or int(num) > len(visible_base.data_base):
+            num = input('Введите корректный номер позиции профиля: ')
+        visible_base.data_base[int(num) - 1].print_all_info()
+        print('Выберите действие для данного профиля',
+              '1. Удаление профиля', '2. Изменение профиля', '3. Добавление звёздочки профилю',
+              '4. Выход', sep='\n')
+        while True:
+            console_input = input()
+            match console_input:
+                case '1':
+                    self.data_base.delete_profile_by_id(visible_base.data_base[int(num) - 1].id)
+                    break
+                case '2':
+                    self.data_base.data_base[self.data_base.find_profile_by_id(visible_base.data_base[int(num) - 1].id)].change_profile()
+                case '3':
+                    if self.data_base.data_base[self.data_base.find_profile_by_id(visible_base.data_base[int(num) - 1].id)].feedback_added:
+                       print('Отзыв уже добавлен ')
+                       break
+                    console_input = input()
+                    while not is_int(console_input) or 0 >= int(console_input) or int(console_input) > 5:
+                        console_input = input('Введите корректный номер позиции профиля: ')
+                    self.data_base.data_base[self.data_base.find_profile_by_id(visible_base.data_base[int(num) - 1].id)].stars[int(console_input) - 1] += 1
+                    self.data_base.data_base[
+                        self.data_base.find_profile_by_id(visible_base.data_base[int(num) - 1].id)].feedback_added = 1
+                case '4':
+                    break
+                case _:
+                    print('Команда не была распознана. Попытайтесь еще раз')
