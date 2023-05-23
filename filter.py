@@ -107,18 +107,24 @@ class Filter:
     def change_name_from_console(self):
         # Функция смены имени с консоли
         print('1. Удаление ФИО или название организации', '2. Изменение ФИО или названия организации',
-              '3. Выход', sep='\n')
+              '3. Показать ФИО или название организации', '4. Выход', sep='\n')
         while True:
             console_input = input()
             match console_input:
                 case '1': self.name = None
                 case '2': self.name = input('Введите ФИО или название организации')
-                case '3': break
+                case '3':
+                    if self.name is None:
+                        print('ФИО или названия организации не выбрано')
+                    else:
+                        print('ФИО или названия организации:', self.name)
+                case '4': break
                 case _: print('Команда не была распознана. Попытайтесь еще раз')
 
     def change_placer_from_console(self):
         # Функция смены placer с консоли
-        print('1. Удаление работодатель-соискатель', '2. Изменение работодатель-соискатель', '3. Выход', sep='\n')
+        print('1. Удаление работодатель-соискатель', '2. Изменение работодатель-соискатель',
+              '3. Показать работодатель-соискатель', '4. Выход', sep='\n')
         while True:
             console_input = input()
             match console_input:
@@ -130,13 +136,21 @@ class Filter:
                             case '0': self.placer = int(console_input)
                             case '1': self.placer = int(console_input)
                             case _: print('Команда не была распознана. Попытайтесь еще раз')
-                case '3': break
+                case '3':
+                    if self.placer is None:
+                        print('Работодатель-соискатель не выбрано')
+                    elif self.placer == 0:
+                        print('Cоискатель')
+                    else:
+                        print('Работодатель')
+                case '4': break
                 case _: print('Команда не была распознана. Попытайтесь еще раз')
 
     def change_min_salary_from_console(self):
         # Функция смены минимальной зп с консоли
         print('1. Удаление параметра минимальной заработной платы',
-              '2. Изменение параметра минимальной заработной платы', '3. Выход', sep='\n')
+              '2. Изменение параметра минимальной заработной платы', '3. Показать минимальную заработную плату',
+              '4. Выход', sep='\n')
         while True:
             console_input = input()
             match console_input:
@@ -156,13 +170,19 @@ class Filter:
                             continue
                         break
                     self.min_salary = console_input
-                case '3': break
+                case '3':
+                    if self.min_salary is None:
+                        print('Минимальная заработная плата не выбрана')
+                    else:
+                        print('Минимальная заработная плата', self.min_salary)
+                case '4': break
                 case _: print('Команда не была распознана. Попытайтесь еще раз')
 
     def change_max_salary_from_console(self):
         # Функция смены максимальной зп с консоли
         print('1. Удаление параметра максимальной заработной платы',
-              '2. Изменение параметра максимальной заработной платы', '3. Выход', sep='\n')
+              '2. Изменение параметра максимальной заработной платы', '3. Показать максимальную заработную плату',
+              '4. Выход', sep='\n')
         while True:
             console_input = input()
             match console_input:
@@ -182,23 +202,34 @@ class Filter:
                             continue
                         break
                     self.max_salary = console_input
-                case '3': break
+                case '3':
+                    if self.max_salary is None:
+                        print('Максимальная заработная плата не выбрана')
+                    else:
+                        print('Максимальная заработная плата', self.max_salary)
+                case '4': break
                 case _: print('Команда не была распознана. Попытайтесь еще раз')
 
     def change_place_work_from_console(self):
         # Функция смены места работы с консоли
-        print('1. Удаление места работы', '2. Изменение места работы', '3. Выход', sep='\n')
+        print('1. Удаление места работы', '2. Изменение места работы', '3. Показать место работы', '4. Выход', sep='\n')
         while True:
             console_input = input()
             match console_input:
                 case '1': self.place_work = None
                 case '2': self.name = input('Введите место работы')
-                case '3': break
+                case '3':
+                    if self.place_work is None:
+                        print('Место работы не выбрано')
+                    else:
+                        print('Место работы:', self.place_work)
+                case '4': break
                 case _: print('Команда не была распознана. Попытайтесь еще раз')
 
     def change_level_education_from_console(self):
         # Функция смены места работы с консоли
-        print('1. Удаление уровня образования', '2. Изменение уровня образования', '3. Выход', sep='\n')
+        print('1. Удаление уровня образования', '2. Изменение уровня образования', '3. Показать уровень образования',
+              '4. Выход', sep='\n')
         while True:
             console_input = input()
             match console_input:
@@ -215,13 +246,18 @@ class Filter:
                             continue
                         break
                     self.level_education = console_input
-                case '3': break
+                case '3':
+                    if self.level_education is None:
+                        print('Уровень образования не выбран')
+                    else:
+                        print('Уровень образования :', self.level_education)
+                case '4': break
                 case _: print('Команда не была распознана. Попытайтесь еще раз')
 
     def change_unique_skills_from_console(self):
         # Функция изменения особых умений
-        print('1. Удаление всех особых умений', '2. Удаление одного особого умения', '3. Добавление умения', '4. Выход',
-              sep='\n')
+        print('1. Удаление всех особых умений', '2. Удаление одного особого умения', '3. Добавление умения',
+              '4. Показать особые умения', '5. Выход', sep='\n')
         while True:
             console_input = input()
             match console_input:
@@ -248,14 +284,21 @@ class Filter:
                         self.unique_skills = [input('Введите особое умение')]
                     else:
                         self.unique_skills.append(input('Введите особое умение'))
-                case '4': break
+                case '4':
+                    if self.unique_skills is None:
+                        print('Особые умения не выбраны')
+                    else:
+                        print('Особые умения:')
+                        for skill in self.unique_skills:
+                            print(skill)
+                case '5': break
                 case _: print('Команда не была распознана. Попытайтесь еще раз')
 
     def change_parameter_of_sort_from_console(self):
         # Функция изменения сортировки
         print('1. По возрастанию имен', '2. По убыванию имен', '3. По возрастанию заработной платы',
               '4. По убыванию заработной платы', '5. По возрастанию уровня образования',
-              '6. По убыванию уровня образования', '7. Выход',
+              '6. По убыванию уровня образования', '7. Показать тип сортировки','8. Выход',
               sep='\n')
         while True:
             console_input = input()
@@ -266,12 +309,25 @@ class Filter:
                 case '4': self.parameter_of_sort = 'salary_down'
                 case '5': self.parameter_of_sort = 'level_education_up'
                 case '6': self.parameter_of_sort = 'level_education_down'
-                case '7': break
+                case '7':
+                    print('Тип сортировки:', end='')
+                    match self.parameter_of_sort:
+                        case 'name_up': print('по возрастанию имени')
+                        case 'name_down': print('по убыванию имени')
+                        case 'salary_up': print('по возрастанию заработной платы')
+                        case 'salary_down': print('по убыванию заработной платы')
+                        case 'level_education_up': print('по возрастанию уровня образования')
+                        case 'level_education_down': print('по убыванию уровня образования')
+                        case _:
+                            with open('exeptions.txt', 'a') as exeption_file:
+                                exeption_file.write('Некорректно обработан параметр сортировки при изменении фильтра\n')
+                case '8': break
                 case _: print('Команда не была распознана. Попытайтесь еще раз')
 
     def change_spec_from_console(self, list_of_spec: List_of_specialization):
         # Функция изменения сортировки
-        print('1. Удалить специализацию', '2.уточнить специализацию', '3. Выход', sep='\n')
+        print('1. Удалить специализацию', '2.уточнить специализацию', '3. Показать текущую специализацию',
+              '4. Выход', sep='\n')
         while True:
             console_input = input()
             match console_input:
@@ -295,5 +351,11 @@ class Filter:
                             break
                         else:
                             print('Не распознанное уточнение. Попытайтесь еще раз')
-                case '3': break
+                case '3':
+                    if self.spec is None:
+                        print('Специализация не выбрана')
+                    else:
+                        print('Специализация:', end='')
+                        self.spec.print_specialization()
+                case '4': break
                 case _: print('Команда не была распознана. Попытайтесь еще раз')
