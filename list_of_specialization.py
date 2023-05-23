@@ -21,7 +21,8 @@ class List_of_specialization:
             self.add_specialization(Specialization(list(file_str.split(', '))))
             while file_str:
                 file_str = f_spec.readline()[:-1]
-                self.add_specialization(Specialization(list(file_str.split(', '))))
+                if file_str != '':
+                    self.add_specialization(Specialization(list(file_str.split(', '))))
 
     def reduce_find_recommand(self, new_spec: Specialization) -> set[str]:
         # Функция по заданной специализации пытается найти какое-нибудь уточнение этой специализации
