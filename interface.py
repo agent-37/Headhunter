@@ -1,6 +1,7 @@
 from list_of_specialization import List_of_specialization
 from base import Base
 from filter import Filter
+from profile import Profile, is_int
 
 
 class Interface:
@@ -52,3 +53,24 @@ class Interface:
                 case '3': self.filter.print_filter_info()
                 case '4': break
                 case _: print('Команда не была распознана. Попытайтесь еще раз')
+
+    def add_profile_in_data_base_from_console(self):
+        # функция добавляет прочитанный с консоли профиль в data_dase
+        print('Заполните анкету: ')
+        new_prof = Profile()
+        new_prof.read_from_console(self.all_spec)
+        if not self.data_base.add_new_profile(new_prof, self.all_spec):
+            print('Что-то пошло не так, профиль не добавлен')
+
+    def delete_profile_from_data_base(self):
+        # функция удаляет профиль из базы данных по введённой позиции
+        num = input('Введите номер позиции профиля: ')
+        visible_base = self.data_base.sift_and_sort(self.filter)
+        if len(visible_base.data_base) == 0:
+            print('Список анкет пуст ')
+            return
+        while not is_int(num) or 0 >= int(num) or int(num) > len(visible_base.data_base):
+            num = input('Введите корректный номер позиции профиля: ')
+        self.data_base.delete_profile_by_id(visible_base.data_base[int(num)-1].id)
+
+
