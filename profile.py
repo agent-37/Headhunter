@@ -253,9 +253,7 @@ class Profile:
                         vocation.print_specialization()
                         idx = idx + 1
                     # тут закончила
-                case '5':
-                    new_salary = int(input('Введите новую заработную плату: '))  # сделать проверку на совпадение со старой зарплатой
-                    self.salary = new_salary
+                case '5': self.change_profile_salary_by_console()
                 case '6':
                     # добавление/удаление 1 города (может нескольких) и проверка на корректность
                     print('Доступные действия:\n'
@@ -296,3 +294,10 @@ class Profile:
                 case '1': self.placer = abs(self.placer - 1)
                 case '2': return
                 case _: print('Команда не была распознана. Попытайтесь еще раз')
+
+    def change_profile_salary_by_console(self):
+        # функция изменения зарплаты пользователя через консоль
+        new_salary = input('Введите новую заработную плату: ')
+        while not is_float(new_salary) or float(new_salary) < 0:
+            new_salary = input('Некорректные данные. Повторите ввод: ')
+        self.salary = float(new_salary)
