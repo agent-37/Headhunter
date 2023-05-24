@@ -317,9 +317,42 @@ class Profile:
                         print('Такой город уже находится в списке.')
                     return
                 case '2':
+                    if len(self.place_work) == 1:
+                        print('Должен оставаться хотя бы 1 город.')
+                        return
                     number = input('Выберите номер города, который хотите удалить: ')
                     while not is_int(number) or int(number) < 1 or int(number) > len(self.place_work):
                         number = input('Некорректные данные. Повторите ввод: ')
                     self.place_work.pop(int(number) - 1)
+                    return
+                case _: print('Команда не была распознана. Попытайтесь еще раз')
+
+    def change_profile_unique_skills_by_console(self):
+        # функция изменения особых умений пользователя через консоль
+        if len(self.unique_skills) != 0:
+            print('Особые умения:')
+            for idx in range(len(self.unique_skills)):
+                print(idx + 1, self.unique_skills[idx], sep=') ')
+        else:
+            print('Особые умения отсутствуют')
+        print('Доступные действия:', '1. Добавить особое умение', '2. Удалить особое умение', sep='\n')
+        while True:
+            number = input('Выберите пункт: ')
+            match number:
+                case '1':
+                    new_unique_skill = input('Введите новое особое умение: ')
+                    if new_unique_skill not in self.unique_skills:
+                        self.unique_skills.append(new_unique_skill)
+                    else:
+                        print('Такое умение уже находится в списке.')
+                    return
+                case '2':
+                    if len(self.unique_skills) == 0:
+                        print('Информация об уникальных умениях отсутствует.')
+                        return
+                    number = input('Выберите номер особого умения, который хотите удалить: ')
+                    while not is_int(number) or int(number) < 1 or int(number) > len(self.unique_skills):
+                        number = input('Некорректные данные. Повторите ввод: ')
+                    self.unique_skills.pop(int(number) - 1)
                     return
                 case _: print('Команда не была распознана. Попытайтесь еще раз')
