@@ -102,15 +102,14 @@ class Profile:
             case(4): print('высшее I степени (бакалавриат)')
             case(5): print('высшее II степени (специалитет, магистратура)')
             case(6): print('высшее III степени (подготовка кадров высшей квалификации)')
-        print('Особые умения:')
-        if len(self.unique_skills) == 0:
-            print('информация отсутствует')
-        else:
+        if len(self.unique_skills) != 0:
+            print('Особые умения:')
             for skill in self.unique_skills:
                 print(skill)
-        print('Оценки аккаунта:', end=' ')
-        for idx in range(5):
-            print(idx,':', '*' * self.stars.count(idx))
+        if self.placer == 0:
+            print('Оценки аккаунта:')
+            for idx in range(6):
+                print(idx,':', '*' * self.stars.count(idx))
 
     def print_some_info(self):
         # Функция для вывода частичной информации о профиле в консоль
