@@ -239,7 +239,6 @@ class Profile:
                 case '1':
                     new_name = input('Введите новое имя пользователя/организации: ')
                     self.name = new_name
-                case '2': self.change_profile_placer_by_console()
                 case '3':
                     # добавление/удаление 1 профессии (может нескольких) и проверка на корректность
                     print('Доступные действия:\n'
@@ -259,18 +258,7 @@ class Profile:
                     print('Доступные действия:\n'
                           '1. Добавить город\n'
                           '2. Удалить город')
-                case '7':
-                    # нужна проверка на корректность
-                    print('Доступные действия:\n'
-                          '1. Изменить последнее место обучения\n'
-                          '2. Изменить уровень обучения')
-                    number = int(input('Выберите пункт: '))
-                    if number == 1:
-                        new_name = input('Введите новое образовательное учреждение: ')
-                        self.name_education = new_name
-                    else:
-                        new_level = int(input('Введите новый уровень образования: '))
-                        self.level_education = new_level
+                case '7': self.change_profile_education_by_console()
                 case '8':
                     # добавление/удаление 1 особого умения (может нескольких) и проверка на корректность
                     print('Доступные действия:\n'
@@ -280,24 +268,37 @@ class Profile:
                 case '9': return
                 case _: print('Команда не была распознана. Попытайтесь еще раз')
 
-    def change_profile_placer_by_console(self):
-        # функция изменения роли пользователя через консоль
-        print('Ваша текущая роль -', end=' ')
-        if self.placer == 0:
-            print('\'соискатель\'', end='. ')
-        else:
-            print('\'работодатель\'', end='. ')
-        print('Хотите поменять роль на другую?', '1. Да', '2. Нет', sep='\n')
-        while True:
-            number = input('Выберите пункт: ')
-            match number:
-                case '1': self.placer = abs(self.placer - 1)
-                case '2': return
-                case _: print('Команда не была распознана. Попытайтесь еще раз')
-
     def change_profile_salary_by_console(self):
         # функция изменения зарплаты пользователя через консоль
         new_salary = input('Введите новую заработную плату: ')
         while not is_float(new_salary) or float(new_salary) < 0:
             new_salary = input('Некорректные данные. Повторите ввод: ')
         self.salary = float(new_salary)
+
+    def change_profile_education_by_console(self):
+        # функция изменения образования пользователя через консоль
+        if self.placer == 0:
+            print('Доступные действия:', '1. Изменить последнее место образования',  '2. Изменить уровень образования', sep='\n')
+            while True:
+                number = input('Выберите пункт: ')
+                match number:
+                    case '1':
+                        new_name = input('Введите новое образовательное учреждение: ')
+                        self.name_education = new_name
+                    case '2': self.change_profile_level_education_by_console()
+                    case _: print('Команда не была распознана. Попытайтесь еще раз')
+        else:
+            print('Хотите изменить уровень образования?', '1. Да', '2. Нет', sep='\n')
+            while True:
+                number = input('Выберите пункт: ')
+                match number:
+                    case '1': self.change_profile_level_education_by_console()
+                    case '2': return
+                    case _: print('Команда не была распознана. Попытайтесь еще раз')
+
+    def change_profile_level_education_by_console(self):
+        # функция изменения уровня образования пользователя через консоль
+        new_level = input('Введите новый уровень образования: ')
+        while not is_int(new_level) or int(new_level) < 0 or int(new_level) > 6:
+            new_level = input('Некорректные данные. Повторите ввод: ')
+        self.level_education = int(new_level)
