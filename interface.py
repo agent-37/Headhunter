@@ -108,3 +108,14 @@ class Interface:
                     break
                 case _:
                     print('Команда не была распознана. Попытайтесь еще раз')
+
+    def change_profile_from_data_base(self):
+        # функция интерфейса для изменения профиля
+        num = input('Введите номер позиции профиля: ')
+        visible_base = self.data_base.sift_and_sort(self.filter)
+        if len(visible_base.data_base) == 0:
+            print('Список анкет пуст ')
+            return
+        while not is_int(num) or 0 >= int(num) or int(num) > len(visible_base.data_base):
+            num = input('Введите корректный номер позиции профиля: ')
+        self.data_base.data_base[self.data_base.find_profile_by_id(visible_base.data_base[int(num) - 1].id)].change_profile()
