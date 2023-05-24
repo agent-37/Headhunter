@@ -41,7 +41,7 @@ class Profile:
         self.placer = 0
         self.spec = None
         self.salary = 0
-        self.place_work = ''
+        self.place_work = []
         self.name_education = ''
         self.level_education = 0
         self.unique_skills = []
@@ -253,20 +253,12 @@ class Profile:
                         idx = idx + 1
                     # тут закончила
                 case '5': self.change_profile_salary_by_console()
-                case '6':
-                    # добавление/удаление 1 города (может нескольких) и проверка на корректность
-                    print('Доступные действия:\n'
-                          '1. Добавить город\n'
-                          '2. Удалить город')
+                case '6': self.change_profile_town_by_console()
                 case '7': self.change_profile_education_by_console()
-                case '8':
-                    # добавление/удаление 1 особого умения (может нескольких) и проверка на корректность
-                    print('Доступные действия:\n'
-                          '1. Добавить особое умение\n'
-                          '2. Удалить особое умение')
-                    number = int(input('Выберите пункт: '))
+                case '8': self.change_profile_unique_skills_by_console()
                 case '9': return
                 case _: print('Команда не была распознана. Попытайтесь еще раз')
+            #!!! сделать вывод текущих данных перед их изменением
 
     def change_profile_salary_by_console(self):
         # функция изменения зарплаты пользователя через консоль
@@ -283,16 +275,21 @@ class Profile:
                 number = input('Выберите пункт: ')
                 match number:
                     case '1':
-                        new_name = input('Введите новое образовательное учреждение: ')
-                        self.name_education = new_name
-                    case '2': self.change_profile_level_education_by_console()
+                        new_name_education = input('Введите новое образовательное учреждение: ')
+                        self.name_education = new_name_education
+                        return
+                    case '2':
+                        self.change_profile_level_education_by_console()
+                        return
                     case _: print('Команда не была распознана. Попытайтесь еще раз')
         else:
             print('Хотите изменить уровень образования?', '1. Да', '2. Нет', sep='\n')
             while True:
                 number = input('Выберите пункт: ')
                 match number:
-                    case '1': self.change_profile_level_education_by_console()
+                    case '1':
+                        self.change_profile_level_education_by_console()
+                        return
                     case '2': return
                     case _: print('Команда не была распознана. Попытайтесь еще раз')
 
@@ -302,3 +299,27 @@ class Profile:
         while not is_int(new_level) or int(new_level) < 0 or int(new_level) > 6:
             new_level = input('Некорректные данные. Повторите ввод: ')
         self.level_education = int(new_level)
+
+    def change_profile_town_by_console(self):
+        # функция изменения города для работы пользователя через консоль
+        print('Города:')
+        for idx in range(len(self.place_work)):
+            print(idx + 1, self.place_work[idx], sep=') ')
+        print('Доступные действия:', '1. Добавить город', '2. Удалить город', sep='\n')
+        while True:
+            number = input('Выберите пункт: ')
+            match number:
+                case '1':
+                    new_town = input('Введите новое место работы: ')
+                    if new_town not in self.place_work:
+                        self.place_work.append(new_town)
+                    else:
+                        print('Такой город уже находится в списке.')
+                    return
+                case '2':
+                    number = input('Выберите номер города, который хотите удалить: ')
+                    while not is_int(number) or int(number) < 1 or int(number) > len(self.place_work):
+                        number = input('Некорректные данные. Повторите ввод: ')
+                    self.place_work.pop(int(number) - 1)
+                    return
+                case _: print('Команда не была распознана. Попытайтесь еще раз')
