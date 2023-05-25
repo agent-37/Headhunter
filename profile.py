@@ -237,6 +237,7 @@ class Profile:
             item_number = input('Выберите параметр, который хотите изменить: ')
             match item_number:
                 case '1':
+                    print('Текущее имя пользователя:', self.name)
                     new_name = input('Введите новое имя пользователя/организации: ')
                     self.name = new_name
                 case '2': self.change_profile_spec_by_console(list_)
@@ -250,6 +251,7 @@ class Profile:
 
     def change_profile_salary_by_console(self):
         # функция изменения зарплаты пользователя через консоль
+        print('Текующая заработная плата:', self.salary)
         new_salary = input('Введите новую заработную плату: ')
         while not is_float(new_salary) or float(new_salary) < 0:
             new_salary = input('Некорректные данные. Повторите ввод: ')
@@ -258,7 +260,10 @@ class Profile:
     def change_profile_education_by_console(self):
         # функция изменения образования пользователя через консоль
         if self.placer == 0:
-            print('Доступные действия:', '1. Изменить последнее место образования',  '2. Изменить уровень образования', sep='\n')
+            print('Текущее образование:', self.name_education)
+        print('Текущий уровень образования:', self.level_education)
+        if self.placer == 0:
+            print('Доступные действия:', '1. Изменить последнее место образования', '2. Изменить уровень образования', sep='\n')
             while True:
                 number = input('Выберите пункт: ')
                 match number:
@@ -346,7 +351,7 @@ class Profile:
                 case _: print('Команда не была распознана. Попытайтесь еще раз')
 
     def change_profile_spec_by_console(self, list_ : List_of_specialization):
-        print('Предлагаемая работа:')
+        print('Текущая работа:')
         idx = 1
         for vocation in self.spec:
             print(idx, end=' ')
