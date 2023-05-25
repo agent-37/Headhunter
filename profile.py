@@ -228,35 +228,23 @@ class Profile:
                                         'Например: Водительские права категории\n' +
                                         'Если нет таковых оставьте это поле пустым').split(', '))
 
-    def change_profile(self):
+    def change_profile(self, list_ : List_of_specialization):
         # функция на данный момент максимально сырая и по большей части заглушка
-        print('Параметры, доступные для изменения:', '1. Имя пользователя/организации', '2. Роль соискателя объявления',
-              '3. Профессия', '4. Стаж работы', '5. Заработная плата', '6. Место работы', '7. Место и уровень образования',
-              '8. Особые умения', '9. Выход', sep='\n')
+        print('Параметры, доступные для изменения:', '1. Имя пользователя/организации', '2. Профессия и стаж работы',
+              '3. Заработная плата', '4. Место работы', '5. Место и уровень образования',
+              '6. Особые умения', '7. Выход', sep='\n')
         while True:
             item_number = input('Выберите параметр, который хотите изменить: ')
             match item_number:
                 case '1':
                     new_name = input('Введите новое имя пользователя/организации: ')
                     self.name = new_name
-                case '3':
-                    # добавление/удаление 1 профессии (может нескольких) и проверка на корректность
-                    print('Доступные действия:\n'
-                          '1. Добавить професию\n'
-                          '2. Удалить профессию')
-                case '4':
-                    print('Список ваших профессий:')
-                    idx = 1
-                    for vocation in self.spec:
-                        print(idx, end=': ')
-                        vocation.print_specialization()
-                        idx = idx + 1
-                    # тут закончила
-                case '5': self.change_profile_salary_by_console()
-                case '6': self.change_profile_town_by_console()
-                case '7': self.change_profile_education_by_console()
-                case '8': self.change_profile_unique_skills_by_console()
-                case '9': return
+                case '2': self.change_profile_spec_by_console(list_)
+                case '3': self.change_profile_salary_by_console()
+                case '4': self.change_profile_town_by_console()
+                case '5': self.change_profile_education_by_console()
+                case '6': self.change_profile_unique_skills_by_console()
+                case '7': return
                 case _: print('Команда не была распознана. Попытайтесь еще раз')
             #!!! сделать вывод текущих данных перед их изменением
 
@@ -356,3 +344,98 @@ class Profile:
                     self.unique_skills.pop(int(number) - 1)
                     return
                 case _: print('Команда не была распознана. Попытайтесь еще раз')
+
+    def change_profile_spec_by_console(self, list_ : List_of_specialization):
+        print('Предлагаемая работа:')
+        idx = 1
+        for vocation in self.spec:
+            print(idx, end=' ')
+            vocation.print_specialization()
+            idx = idx + 1
+            if self.placer == 0:
+                print('Стаж:', vocation.work_exp_max, 'лет')
+            else:
+                if vocation.work_exp_min == 0 and vocation.work_exp_max == 100:
+                    print('Стаж: не важен')
+                elif vocation.work_exp_min == 0:
+                    print('Стаж: до', vocation.work_exp_max, 'лет')
+                elif vocation.work_exp_max == 100:
+                    print('Стаж: от', vocation.work_exp_min, 'лет')
+                else:
+                    print('Стаж: от', vocation.work_exp_min, 'до', vocation.work_exp_max, 'лет')
+        print('Доступные действия:', '1. Добавить работу', '2. Удалить работу', '3. Изменить стаж у 1 работы', sep='\n')
+        while True:
+            number = input('Выберите пункт: ')
+            match number:
+                case '1':
+                    temp_spec = Specialization([])
+                    set_of_spec = list_.reduce_find_recommand(temp_spec)
+                    while len(set_of_spec) != 0:
+                        for spec in set_of_spec:
+                            print(spec)
+                        new_spec = input('Введите уточнение по работе: ')
+                        while new_spec not in set_of_spec:
+                            new_spec = input('Такая профессия некорректна. Выберите что-нибудь из предложенного списка: ')
+                        temp_spec.profession.append(new_spec)
+                        set_of_spec = list_.reduce_find_recommand(temp_spec)
+                    if temp_spec in self.spec:
+                        print('У вас уже имеется такая работа. Добавление не может быть произведено.')
+                        return
+                    if self.placer == 0:
+                        work_exp = input('Введите стаж работы: ')
+                        while not is_float(work_exp) or float(work_exp) < 0 or float(work_exp) > 100:
+                            work_exp = input('Некорректные данные. Стаж работы должен выглядеть как число от 0 (если его нет) до 100 (если он не важен). Повторите ввод: ')
+                        temp_spec.work_exp_min = float(work_exp)
+                        temp_spec.work_exp_max = float(work_exp)
+                    else:
+                        work_exp = input('Введите минимальный стаж работы: ')
+                        while not is_float(work_exp) or float(work_exp) < 0 or float(work_exp) > 100:
+                            work_exp = input('Некорректные данные. Стаж работы должен выглядеть как число от 0 (если его нет) до 100 (если он не важен). Повторите ввод: ')
+                        temp_spec.work_exp_min = float(work_exp)
+                        work_exp = input('Введите максимальный стаж работы: ')
+                        while not is_float(work_exp) or float(work_exp) < 0 or float(work_exp) > 100 or temp_spec.work_exp_min > float(work_exp):
+                            work_exp = input('Некорректные данные. Стаж работы должен выглядеть как число от 0 (если его нет) до 100 (если он не важен). Повторите ввод: ')
+                        temp_spec.work_exp_max = float(work_exp)
+                    self.spec.append(temp_spec)
+                    return
+                case '2':
+                    if len(self.spec) == 1:
+                        print('Нужна хотя бы 1 работа.')
+                        return
+                    number = input('Выберите номер работы, который хотите удалить: ')
+                    while not is_int(number) or int(number) < 1 or int(number) > len(self.spec):
+                        number = input('Некорректные данные. Повторите ввод: ')
+                    self.spec.pop(int(number) - 1)
+                    return
+                case '3':
+                    number = input('Выберите номер работы, стаж который хотите изменить: ')
+                    while not is_int(number) or int(number) < 1 or int(number) > len(self.spec):
+                        number = input('Некорректные данные. Повторите ввод: ')
+                    if self.placer == 0:
+                        work_exp = input('Введите новый стаж работы: ')
+                        while not is_float(work_exp) or float(work_exp) < 0 or float(work_exp) > 100:
+                            work_exp = input('Некорректные данные. Стаж работы должен выглядеть как число от 0 (если его нет) до 100 (если он не важен). Повторите ввод: ')
+                        self.spec[int(number) - 1].work_exp_min = float(work_exp)
+                        self.spec[int(number) - 1].work_exp_max = float(work_exp)
+                    else:
+                        print('Доступные действия:', '1. Изменить минимальный стаж работы', '2. Изменить максимальный стаж работы', sep='\n')
+                        while True:
+                            number_ = input('Выберите пункт: ')
+                            match number_:
+                                case '1':
+                                    work_exp = input('Введите новый стаж работы: ')
+                                    while not is_float(work_exp) or float(work_exp) < 0 or float(work_exp) > 100:
+                                        work_exp = input('Некорректные данные. Стаж работы должен выглядеть как число от 0 (если его нет) до 100 (если он не важен). Повторите ввод: ')
+                                    self.spec[int(number) - 1].work_exp_min = float(work_exp)
+                                    return
+                                case '2':
+                                    work_exp = input('Введите новый стаж работы: ')
+                                    while not is_float(work_exp) or float(work_exp) < 0 or float(work_exp) > 100:
+                                        work_exp = input('Некорректные данные. Стаж работы должен выглядеть как число от 0 (если его нет) до 100 (если он не важен). Повторите ввод: ')
+                                    self.spec[int(number) - 1].work_exp_max = float(work_exp)
+                                    return
+                                case _:
+                                    print('Команда не была распознана. Попытайтесь еще раз')
+                    return
+                case _:
+                    print('Команда не была распознана. Попытайтесь еще раз')
