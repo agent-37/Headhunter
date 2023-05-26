@@ -131,10 +131,15 @@ class Filter:
                 case '1': self.placer = None
                 case '2':
                     while True:
+                        print('1. Соискатель', '2. Работодатель', sep='\n')
                         console_input = input()
                         match console_input:
-                            case '0': self.placer = int(console_input)
-                            case '1': self.placer = int(console_input)
+                            case '1':
+                                self.placer = int(console_input) - 1
+                                break
+                            case '2':
+                                self.placer = int(console_input) - 1
+                                break
                             case _: print('Команда не была распознана. Попытайтесь еще раз')
                 case '3':
                     if self.placer is None:
@@ -218,7 +223,7 @@ class Filter:
             console_input = input()
             match console_input:
                 case '1': self.place_work = None
-                case '2': self.name = input('Введите место работы')
+                case '2': self.place_work = input('Введите место работы')
                 case '3':
                     if self.place_work is None:
                         print('Место работы не выбрано')
@@ -329,13 +334,13 @@ class Filter:
     def change_spec_from_console(self, list_of_spec: List_of_specialization):
         # Функция изменения сортировки
         while True:
-            print('1. Удалить специализацию', '2.уточнить специализацию', '3. Показать текущую специализацию',
+            print('1. Удалить специализацию', '2. Уточнить специализацию', '3. Показать текущую специализацию',
                   '4. Выход', sep='\n')
             console_input = input()
             match console_input:
                 case '1': self.spec = None
                 case '2':
-                    local_spec = Specialization([''])
+                    local_spec = Specialization([])
                     if self.spec is not None:
                         local_spec = self.spec
                     chosen_spec = list_of_spec.reduce_find_recommand(local_spec)
@@ -357,7 +362,7 @@ class Filter:
                     if self.spec is None:
                         print('Специализация не выбрана')
                     else:
-                        print('Специализация:', end='')
+                        print('Специализация:', end=' ')
                         self.spec.print_specialization()
                 case '4': break
                 case _: print('Команда не была распознана. Попытайтесь еще раз')
