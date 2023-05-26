@@ -130,22 +130,25 @@ class Interface:
         while True:
             if not self.filter.check_correct():
                 print('В фильтре необходимо выбрать специализацию и параметр работодатель-соискатель.')
-                print('1. Изменить фильтра', '2. Выход', sep='\n')
+                print('1. Изменить фильтра', '2. Добавить профиль в базу данных', '3. Выход', sep='\n')
                 number = input('Выберите пункт: ')
                 match number:
                     case '1': self.change_filter(self.all_spec)
-                    case '2': return
+                    case '2': self.add_profile_in_data_base_from_console()
+                    case '3': return
                     case _: print('Команда не была распознана. Попытайтесь еще раз')
             else:
                 visible_base = self.data_base.sift_and_sort(self.filter)
                 if len(visible_base.data_base) == 0:
                     print('Вы использовали слишком жесткий фильтр. По вашему запросу не было ничего найдено')
-                    print('1. Изменить фильтра', '2.Выход', sep='\n')
+                    print('1. Изменить фильтра','2. Добавить профиль в базу данных', '3. Выход', sep='\n')
                     number = input('Выберите пункт: ')
                     match number:
                         case '1':
                             self.change_filter(self.all_spec)
                         case '2':
+                            self.add_profile_in_data_base_from_console()
+                        case '3':
                             return
                         case _:
                             print('Команда не была распознана. Попытайтесь еще раз')
