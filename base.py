@@ -109,3 +109,11 @@ class Base:
         new_data_base = self.sift(filter)
         new_data_base.sort_data_base(filter)
         return new_data_base
+
+    def print_base(self):
+        idx = 1
+        for current_profile in self.data_base:
+            print(idx, end=')\n')
+            print('--------------------------------------------------')
+            current_profile.print_some_info()
+            print('--------------------------------------------------')
