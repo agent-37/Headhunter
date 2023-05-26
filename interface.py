@@ -120,22 +120,55 @@ class Interface:
             num = input('Введите корректный номер позиции профиля: ')
         self.data_base.data_base[self.data_base.find_profile_by_id(visible_base.data_base[int(num) - 1].id)].change_profile()
 
+    def print_base(self):
+        idx = 1
+        for current_profile in self.data_base.data_base:
+            print(idx, end=')\n')
+            print('--------------------------------------------------')
+            current_profile.print_some_info()
+            print('--------------------------------------------------')
+
     def interact_with_user(self):
         # главная функция интерактива с пользователем
         self.upload_spec_from_file()
         self.upload_base_from_file()
         print('Привет, пользователь. Ты находишься на лучшем сайте по поиску работы \'Охотник за головами\'.')
-        print('Возможные действия:', '1. Изменить фильтр', '2. Добавить профиль в базу данных',
-              '3. Удалить профиль из базы данных', '4. Открыть профиль для просмотра', '5. Изменить профиль', '6. Выйти', sep='\n')
         while True:
-            number = input('Выберите пункт: ')
-            match number:
-                case '1': self.change_filter(self.all_spec)
-                case '2': self.add_profile_in_data_base_from_console()
-                case '3': self.delete_profile_from_data_base()
-                case '4': self.open_and_interaction_profile()
-                case '5': self.change_profile_from_data_base()
-                case '6':
-                    print('До свидания. Мы будем рады снова увидеть вас на нашем сайте.')
-                    return
-                case _: print('Команда не была распознана. Попытайтесь еще раз')
+            if not self.filter.check_correct():
+                print('В фильтре необходимо выбрать специализацию и параметр работодатель-соискатель.')
+                print('1. Изменить фильтра', '2.Выход', sep='\n')
+                number = input('Выберите пункт: ')
+                match number:
+                    case '1': self.change_filter(self.all_spec)
+                    case '2': return
+                    case _: print('Команда не была распознана. Попытайтесь еще раз')
+            else:
+                visible_base = self.data_base.sift_and_sort(self.filter)
+                if len(visible_base.data_base) == 0:
+                    print('Вы использовали слишком жесткий фильтр. По вашему запросу не было ничего найдено')
+                    print('1. Изменить фильтра', '2.Выход', sep='\n')
+                    number = input('Выберите пункт: ')
+                    match number:
+                        case '1':
+                            self.change_filter(self.all_spec)
+                        case '2':
+                            return
+                        case _:
+                            print('Команда не была распознана. Попытайтесь еще раз')
+                else:
+                    print('Возможные действия:', '1. Изменить фильтр', '2. Добавить профиль в базу данных',
+                          '3. Удалить профиль из базы данных', '4. Открыть профиль для просмотра',
+                          '5. Изменить профиль', '6. Выйти', sep='\n')
+                    visible_base.print_base()
+                    number = input('Выберите пункт: ')
+                    match number:
+                        case '1': self.change_filter(self.all_spec)
+                        case '2': self.add_profile_in_data_base_from_console()
+                        case '3': self.delete_profile_from_data_base()
+                        case '4': self.open_and_interaction_profile()
+                        case '5': self.change_profile_from_data_base()
+                        case '6':
+                            print('До свидания. Мы будем рады снова увидеть вас на нашем сайте.')
+                            return
+                        case _: print('Команда не была распознана. Попытайтесь еще раз')
+
