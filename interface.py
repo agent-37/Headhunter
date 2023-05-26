@@ -119,7 +119,7 @@ class Interface:
             return
         while not is_int(num) or 0 >= int(num) or int(num) > len(visible_base.data_base):
             num = input('Введите корректный номер позиции профиля: ')
-        self.data_base.data_base[self.data_base.find_profile_by_id(visible_base.data_base[int(num) - 1].id)].change_profile()
+        self.data_base.data_base[self.data_base.find_profile_by_id(visible_base.data_base[int(num) - 1].id)].change_profile(self.all_spec)
 
 
     def interact_with_user(self):
