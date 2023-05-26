@@ -39,14 +39,14 @@ class Profile:
         # ИЗНАЧАЛЬНО ДАННЫЕ МУСОРНЫЕ
         self.name = ''
         self.placer = 0
-        self.spec = None
+        self.spec = []
         self.salary = 0
         self.place_work = []
         self.name_education = ''
         self.level_education = 0
         self.unique_skills = []
         self.id = 0
-        self.stars = [0, 0, 0, 0, 0]
+        self.stars = []
         self.feedback_added = 0
 
     def setter(self, name: str, placer: int, spec: list[Specialization], salary: float, place_work: list,
@@ -174,7 +174,6 @@ class Profile:
         placer = input('Ведите "соискатель" или "организация"\n')
         while placer != 'соискатель' and placer != 'организация':
             placer = input('Ведите "соискатель" или "организация"\n')
-            print(placer != 'соискатель', placer != 'организация')
         if placer == "организация":
             self.placer = 1
         else:
@@ -188,11 +187,11 @@ class Profile:
             for i in range(buff):
                 spec_name = list(input('Введите название специализации через запятую(", ")\n').split(', '))
                 min_exp = input('Ведите минимальный стаж работы(если эта информация не важна, то введите 0)\n')
-                while not is_float(min_exp):
+                while not is_float(min_exp) or float(min_exp) < 0:
                     min_exp = input('Минимальный стаж работы - это вещественное число\n')
                 min_exp = float(min_exp)
                 max_exp = input('Ведите максимальный стаж работы(если эта информация не важна, то введите 100)\n')
-                while not is_float(max_exp) or float(max_exp) < min_exp:
+                while not is_float(max_exp) or float(max_exp) < min_exp or float(max_exp) < 0:
                     max_exp = input('Максимальный стаж работы - это вещественное число не меньшее минимального стажа\n')
                 max_exp = float(max_exp)
                 new_spec = Specialization(spec_name, min_exp, max_exp)
@@ -200,11 +199,12 @@ class Profile:
                     print('Специализации нет в базе данных, попробуйте ввести ее по другому')
                     new_spec.profession = list(
                         input('Введите название специализации через запятую(", ")\n').split(', '))
+                self.spec.append(new_spec)
         else:
             for i in range(buff):
                 spec_name = list(input('Введите название специализации через запятую(", ")\n').split(', '))
                 min_exp = input('Ведите стаж работы\n')
-                while not is_float(min_exp):
+                while not is_float(min_exp) or float(min_exp):
                     min_exp = input('Стаж работы - это вещественное число\n')
                 min_exp = float(min_exp)
                 new_spec = Specialization(spec_name, min_exp, min_exp)
@@ -212,18 +212,19 @@ class Profile:
                     print('Специализации нет в базе данных, попробуйте ввести ее по другому')
                     new_spec.profession = list(
                         input('Введите название специализации через запятую (", ")\n').split(', '))
-        self.salary = input('Ведите зарплату\n')
+                self.spec.append(new_spec)
+        buff = input('Ведите зарплату\n')
         while not is_float(buff):
-            self.salary = input('Зарплата должна быть вещественной\n')
-        self.salary = int(self.salary)
+            buff = input('Зарплата должна быть вещественной\n')
+        self.salary = int(buff)
         self.place_work = list(input('Введите через запятую места работы\n').split(', '))
         if self.placer == 0:
             self.name_education = input('Введите ваше образование\n')
         # !! Здесь нужно будет выводить степени образования чтобы пользователь сам их определил
-        self.level_education = input('Ведите степень образования\n')
-        while not is_int(self.level_education):
-            self.level_education = input('Степень образования быть целой\n')
-        self.level_education = int(self.level_education)
+        buff = input('Ведите степень образования\n')
+        while not is_int(buff) or int(buff) < 0 or int(buff) > 6:
+            buff = input('Степень образования быть целой\n')
+        self.level_education = int(buff)
         self.unique_skills = list(input('Введите через запятую уникальные умения или возможности\n' +
                                         'Например: Водительские права категории\n' +
                                         'Если нет таковых оставьте это поле пустым').split(', '))
