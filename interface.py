@@ -22,9 +22,10 @@ class Interface:
     def change_filter(self, list_of_spec: List_of_specialization):
         # Функция для изменения пользователем фильтра.
         # Есть много проверок на дебила
-        print('Выберите, как вы хотели бы изменить фильтр(введите цифру без точки)', '1. Удалить все параметры фильтра',
-              '2. Изменить какой-то параметр', '3. Показать установленные параметры фильтра', '4. Выход', sep='\n')
         while True:
+            print('Выберите, как вы хотели бы изменить фильтр(введите цифру без точки)',
+                  '1. Удалить все параметры фильтра',
+                  '2. Изменить какой-то параметр', '3. Показать установленные параметры фильтра', '4. Выход', sep='\n')
             input_command = input()
             match input_command:
                 case '1':
@@ -101,9 +102,9 @@ class Interface:
                     console_input = input()
                     while not is_int(console_input) or 0 >= int(console_input) or int(console_input) > 5:
                         console_input = input('Введите корректный номер позиции профиля: ')
-                    self.data_base.data_base[self.data_base.find_profile_by_id(visible_base.data_base[int(num) - 1].id)].stars[int(console_input) - 1] += 1
+                    self.data_base.data_base[self.data_base.find_profile_by_id(visible_base.data_base[int(num) - 1].id)].stars.append(int(console_input))
                     self.data_base.data_base[
-                        self.data_base.find_profile_by_id(visible_base.data_base[int(num) - 1].id)].feedback_added = 1
+                         self.data_base.find_profile_by_id(visible_base.data_base[int(num) - 1].id)].feedback_added = 1
                 case '4':
                     break
                 case _:
@@ -120,13 +121,6 @@ class Interface:
             num = input('Введите корректный номер позиции профиля: ')
         self.data_base.data_base[self.data_base.find_profile_by_id(visible_base.data_base[int(num) - 1].id)].change_profile()
 
-    def print_base(self):
-        idx = 1
-        for current_profile in self.data_base.data_base:
-            print(idx, end=')\n')
-            print('--------------------------------------------------')
-            current_profile.print_some_info()
-            print('--------------------------------------------------')
 
     def interact_with_user(self):
         # главная функция интерактива с пользователем
@@ -136,7 +130,7 @@ class Interface:
         while True:
             if not self.filter.check_correct():
                 print('В фильтре необходимо выбрать специализацию и параметр работодатель-соискатель.')
-                print('1. Изменить фильтра', '2.Выход', sep='\n')
+                print('1. Изменить фильтра', '2. Выход', sep='\n')
                 number = input('Выберите пункт: ')
                 match number:
                     case '1': self.change_filter(self.all_spec)
