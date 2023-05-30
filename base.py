@@ -49,7 +49,7 @@ class Base:
             stars = list(map(int, f_prof.readline().split(', ')))
             new_prof = Profile()
             new_prof.setter(name, placer, spec, salary, place_work, name_education, level_education, unique_skills,
-                               self.free_id, stars)
+                            self.free_id, stars)
             self.add_new_profile(new_prof, list_of_spec)
         f_prof.close()
 
