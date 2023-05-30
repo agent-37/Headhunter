@@ -84,10 +84,10 @@ class Interface:
         while not is_int(num) or 0 >= int(num) or int(num) > len(visible_base.data_base):
             num = input('Введите корректный номер позиции профиля: ')
         visible_base.data_base[int(num) - 1].print_all_info()
-        print('Выберите действие для данного профиля',
-              '1. Удаление профиля', '2. Изменение профиля', '3. Добавление звёздочки профилю',
-              '4. Выход', sep='\n')
         while True:
+            print('Выберите действие для данного профиля',
+                  '1. Удаление профиля', '2. Изменение профиля', '3. Добавление звёздочки профилю',
+                  '4. Снова показать профиль', '5. Выход', sep='\n')
             console_input = input()
             match console_input:
                 case '1':
@@ -97,15 +97,17 @@ class Interface:
                     self.data_base.data_base[self.data_base.find_profile_by_id(visible_base.data_base[int(num) - 1].id)].change_profile()
                 case '3':
                     if self.data_base.data_base[self.data_base.find_profile_by_id(visible_base.data_base[int(num) - 1].id)].feedback_added:
-                       print('Отзыв уже добавлен ')
-                       break
-                    console_input = input()
+                        print('Отзыв уже добавлен ')
+                        continue
+                    console_input = input('Введите, к какой позиции хотели бы добавить звездочку:\n')
                     while not is_int(console_input) or 0 >= int(console_input) or int(console_input) > 5:
                         console_input = input('Введите корректный номер позиции профиля: ')
                     self.data_base.data_base[self.data_base.find_profile_by_id(visible_base.data_base[int(num) - 1].id)].stars.append(int(console_input))
                     self.data_base.data_base[
                          self.data_base.find_profile_by_id(visible_base.data_base[int(num) - 1].id)].feedback_added = 1
                 case '4':
+                    visible_base.data_base[int(num) - 1].print_all_info()
+                case '5':
                     break
                 case _:
                     print('Команда не была распознана. Попытайтесь еще раз')
@@ -120,7 +122,6 @@ class Interface:
         while not is_int(num) or 0 >= int(num) or int(num) > len(visible_base.data_base):
             num = input('Введите корректный номер позиции профиля: ')
         self.data_base.data_base[self.data_base.find_profile_by_id(visible_base.data_base[int(num) - 1].id)].change_profile(self.all_spec)
-
 
     def interact_with_user(self):
         # главная функция интерактива с пользователем
@@ -141,7 +142,7 @@ class Interface:
                 visible_base = self.data_base.sift_and_sort(self.filter)
                 if len(visible_base.data_base) == 0:
                     print('Вы использовали слишком жесткий фильтр. По вашему запросу не было ничего найдено')
-                    print('1. Изменить фильтра','2. Добавить профиль в базу данных', '3. Выход', sep='\n')
+                    print('1. Изменить фильтра', '2. Добавить профиль в базу данных', '3. Выход', sep='\n')
                     number = input('Выберите пункт: ')
                     match number:
                         case '1':
@@ -168,4 +169,3 @@ class Interface:
                             print('До свидания. Мы будем рады снова увидеть вас на нашем сайте.')
                             return
                         case _: print('Команда не была распознана. Попытайтесь еще раз')
-
