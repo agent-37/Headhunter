@@ -50,7 +50,7 @@ class Profile:
         self.feedback_added = 0
 
     def setter(self, name: str, placer: int, spec: list[Specialization], salary: float, place_work: list,
-                 name_education: str, level_education: int, unique_skills: list[str], id: int, stars=None):
+               name_education: str, level_education: int, unique_skills: list[str], id: int, stars=None):
         # Это сеттер
         self.name = name
         self.placer = placer
@@ -109,7 +109,7 @@ class Profile:
         if self.placer == 0:
             print('Оценки аккаунта:')
             for idx in range(6):
-                print(idx,':', '*' * self.stars.count(idx))
+                print(idx, ':', '*' * self.stars.count(idx))
 
     def print_some_info(self):
         # Функция для вывода частичной информации о профиле в консоль
@@ -149,7 +149,6 @@ class Profile:
 
             if count_unique_skills != len(filter.unique_skills):
                 return False
-
 
         if filter.spec is not None:
             for one_spec in self.spec:
@@ -229,12 +228,13 @@ class Profile:
                                         'Например: Водительские права категории\n' +
                                         'Если нет таковых оставьте это поле пустым').split(', '))
 
-    def change_profile(self, list_ : List_of_specialization):
+    def change_profile(self, list_: List_of_specialization):
         # функция изменения профиля пользователем с консоли
-        print('Параметры, доступные для изменения:', '1. Имя пользователя/организации', '2. Профессия и стаж работы',
-              '3. Заработная плата', '4. Место работы', '5. Место и уровень образования',
-              '6. Особые умения', '7. Выход', sep='\n')
         while True:
+            print('Параметры, доступные для изменения:', '1. Имя пользователя/организации',
+                  '2. Профессия и стаж работы',
+                  '3. Заработная плата', '4. Место работы', '5. Место и уровень образования',
+                  '6. Особые умения', '7. Выход', sep='\n')
             item_number = input('Выберите параметр, который хотите изменить: ')
             match item_number:
                 case '1':
@@ -263,8 +263,9 @@ class Profile:
             print('Текущее образование:', self.name_education)
         print('Текущий уровень образования:', self.level_education)
         if self.placer == 0:
-            print('Доступные действия:', '1. Изменить последнее место образования', '2. Изменить уровень образования', sep='\n')
             while True:
+                print('Доступные действия:', '1. Изменить последнее место образования',
+                      '2. Изменить уровень образования', sep='\n')
                 number = input('Выберите пункт: ')
                 match number:
                     case '1':
@@ -298,8 +299,8 @@ class Profile:
         print('Города:')
         for idx in range(len(self.place_work)):
             print(idx + 1, self.place_work[idx], sep=') ')
-        print('Доступные действия:', '1. Добавить город', '2. Удалить город', sep='\n')
         while True:
+            print('Доступные действия:', '1. Добавить город', '2. Удалить город', sep='\n')
             number = input('Выберите пункт: ')
             match number:
                 case '1':
@@ -328,8 +329,8 @@ class Profile:
                 print(idx + 1, self.unique_skills[idx], sep=') ')
         else:
             print('Особые умения отсутствуют')
-        print('Доступные действия:', '1. Добавить особое умение', '2. Удалить особое умение', sep='\n')
         while True:
+            print('Доступные действия:', '1. Добавить особое умение', '2. Удалить особое умение', sep='\n')
             number = input('Выберите пункт: ')
             match number:
                 case '1':
@@ -350,7 +351,7 @@ class Profile:
                     return
                 case _: print('Команда не была распознана. Попытайтесь еще раз')
 
-    def change_profile_spec_by_console(self, list_ : List_of_specialization):
+    def change_profile_spec_by_console(self, list_: List_of_specialization):
         # функция изменения специализации пользователя через консоль
         print('Текущая работа:')
         idx = 1
@@ -369,8 +370,9 @@ class Profile:
                     print('Стаж: от', vocation.work_exp_min, 'лет')
                 else:
                     print('Стаж: от', vocation.work_exp_min, 'до', vocation.work_exp_max, 'лет')
-        print('Доступные действия:', '1. Добавить работу', '2. Удалить работу', '3. Изменить стаж у 1 работы', sep='\n')
         while True:
+            print('Доступные действия:', '1. Добавить работу', '2. Удалить работу', '3. Изменить стаж у 1 работы',
+                  sep='\n')
             number = input('Выберите пункт: ')
             match number:
                 case '1':
