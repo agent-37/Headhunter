@@ -26,11 +26,11 @@ class Interface:
             print('Выберите, как вы хотели бы изменить фильтр(введите цифру без точки)',
                   '1. Удалить все параметры фильтра',
                   '2. Изменить какой-то параметр', '3. Показать установленные параметры фильтра', '4. Выход', sep='\n')
-            input_command = input()
+            input_command = input('Выберите пункт: ')
             match input_command:
                 case '1':
                     print('Вы точно уверены?(Введите 1 для подтверждения)')
-                    del_answer = input()
+                    del_answer = input('Выберите пункт: ')
                     if del_answer == '1':
                         self.filter.delete_all_info()
                 case '2':
@@ -38,7 +38,7 @@ class Interface:
                           '2. Соискатель или Работодатель', '3. Специализации', '4. Минимальная заработная плата',
                           '5. Максимальная заработная плата', '6. Место работы', '7. Уровень образования',
                           '8. Уникальные умения', '9. Тип сортировки', '10. Выход', sep='\n')
-                    input_command = input()
+                    input_command = input('Выберите пункт: ')
                     match input_command:
                         case '1': self.filter.change_name_from_console()
                         case '2': self.filter.change_placer_from_console()
@@ -88,7 +88,7 @@ class Interface:
             print('Выберите действие для данного профиля',
                   '1. Удаление профиля', '2. Изменение профиля', '3. Добавление звёздочки профилю',
                   '4. Снова показать профиль', '5. Выход', sep='\n')
-            console_input = input()
+            console_input = input('Выберите пункт: ')
             match console_input:
                 case '1':
                     self.data_base.delete_profile_by_id(visible_base.data_base[int(num) - 1].id)
