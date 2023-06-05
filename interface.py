@@ -131,7 +131,7 @@ class Interface:
         while True:
             if not self.filter.check_correct():
                 print('В фильтре необходимо выбрать специализацию и параметр работодатель-соискатель.')
-                print('1. Изменить фильтра', '2. Добавить профиль в базу данных', '3. Выход', sep='\n')
+                print('1. Изменить фильтр', '2. Добавить профиль в базу данных', '3. Выход', sep='\n')
                 number = input('Выберите пункт: ')
                 match number:
                     case '1': self.change_filter(self.all_spec)
