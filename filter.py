@@ -109,7 +109,7 @@ class Filter:
         while True:
             print('1. Удаление ФИО или название организации', '2. Изменение ФИО или названия организации',
                   '3. Показать ФИО или название организации', '4. Выход', sep='\n')
-            console_input = input()
+            console_input = input('Выберите пункт: ')
             match console_input:
                 case '1': self.name = None
                 case '2': self.name = input('Введите ФИО или название организации')
@@ -126,13 +126,13 @@ class Filter:
         while True:
             print('1. Удаление работодатель-соискатель', '2. Изменение работодатель-соискатель',
                   '3. Показать работодатель-соискатель', '4. Выход', sep='\n')
-            console_input = input()
+            console_input = input('Выберите пункт: ')
             match console_input:
                 case '1': self.placer = None
                 case '2':
                     while True:
                         print('1. Соискатель', '2. Работодатель', sep='\n')
-                        console_input = input()
+                        console_input = input('Выберите пункт: ')
                         match console_input:
                             case '1':
                                 self.placer = int(console_input) - 1
@@ -157,7 +157,7 @@ class Filter:
             print('1. Удаление параметра минимальной заработной платы',
                   '2. Изменение параметра минимальной заработной платы', '3. Показать минимальную заработную плату',
                   '4. Выход', sep='\n')
-            console_input = input()
+            console_input = input('Выберите пункт: ')
             match console_input:
                 case '1': self.min_salary = None
                 case '2':
@@ -189,7 +189,7 @@ class Filter:
             print('1. Удаление параметра максимальной заработной платы',
                   '2. Изменение параметра максимальной заработной платы', '3. Показать максимальную заработную плату',
                   '4. Выход', sep='\n')
-            console_input = input()
+            console_input = input('Выберите пункт: ')
             match console_input:
                 case '1': self.max_salary = None
                 case '2':
@@ -220,7 +220,7 @@ class Filter:
         while True:
             print('1. Удаление места работы', '2. Изменение места работы', '3. Показать место работы', '4. Выход',
                   sep='\n')
-            console_input = input()
+            console_input = input('Выберите пункт: ')
             match console_input:
                 case '1': self.place_work = None
                 case '2': self.place_work = input('Введите место работы')
@@ -238,7 +238,7 @@ class Filter:
             print('1. Удаление уровня образования', '2. Изменение уровня образования',
                   '3. Показать уровень образования',
                   '4. Выход', sep='\n')
-            console_input = input()
+            console_input = input('Выберите пункт: ')
             match console_input:
                 case '1': self.level_education = None
                 case '2':
@@ -266,7 +266,7 @@ class Filter:
         while True:
             print('1. Удаление всех особых умений', '2. Удаление одного особого умения', '3. Добавление умения',
                   '4. Показать особые умения', '5. Выход', sep='\n')
-            console_input = input()
+            console_input = input('Выберите пункт: ')
             match console_input:
                 case '1': self.unique_skills = None
                 case '2':
@@ -308,7 +308,7 @@ class Filter:
                   '4. По убыванию заработной платы', '5. По возрастанию уровня образования',
                   '6. По убыванию уровня образования', '7. Показать тип сортировки', '8. Выход',
                   sep='\n')
-            console_input = input()
+            console_input = input('Выберите пункт: ')
             match console_input:
                 case '1': self.parameter_of_sort = 'name_up'
                 case '2': self.parameter_of_sort = 'name_down'
@@ -336,7 +336,7 @@ class Filter:
         while True:
             print('1. Удалить специализацию', '2. Уточнить специализацию', '3. Показать текущую специализацию',
                   '4. Выход', sep='\n')
-            console_input = input()
+            console_input = input('Выберите пункт: ')
             match console_input:
                 case '1': self.spec = None
                 case '2':
@@ -351,7 +351,7 @@ class Filter:
                         for pos in chosen_spec:
                             print(pos)
                     while True:
-                        console_input = input()
+                        console_input = input('Выберите пункт: ')
                         if console_input in chosen_spec:
                             local_spec.profession.append(console_input)
                             self.spec = local_spec
