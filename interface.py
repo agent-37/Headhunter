@@ -19,6 +19,7 @@ class Interface:
     def upload_spec_from_file(self):
         self.all_spec.read_from_file()
 
+
     def change_filter(self, list_of_spec: List_of_specialization):
         # Функция для изменения пользователем фильтра.
         # Есть много проверок на дебила
